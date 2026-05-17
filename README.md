@@ -1,4 +1,8 @@
 <p align="center">
+  <img alt="Space Station 14" width="700" src="https://media.discordapp.net/attachments/1487521471109796041/1505580382756540646/logo.png?ex=6a0b247f&is=6a09d2ff&hm=b7eec3f86490de6e2e1ea8bde8bfe1d2be64e5ff920e1cb64e86e6db87975ee1&=&format=webp&quality=lossless&width=1872&height=541" />
+</p>
+
+<p align="center">
   Ваш проводник в космический симулятор безумия!<br>
   Основан на идеях <a href="https://github.com/tgstation/tgstation">/tg/station</a> и <a href="https://github.com/shiptest-ss13/Shiptest">Shiptest</a> из Space Station 13.
 </p>
