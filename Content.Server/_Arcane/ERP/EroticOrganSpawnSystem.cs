@@ -83,6 +83,8 @@ public sealed class EroticOrganSpawnSystem : EntitySystem
                     TrySpawnOrgan(uid, chest.Value, "OrganBreasts", "breasts");
                 break;
         }
+
+        RaiseLocalEvent(uid, new EroticOrgansSpawnedEvent());
     }
 
     private void RemoveEroticOrgans(EntityUid bodyUid)
@@ -122,3 +124,5 @@ public sealed class EroticOrganSpawnSystem : EntitySystem
         return null;
     }
 }
+
+public sealed class EroticOrgansSpawnedEvent : EntityEventArgs;

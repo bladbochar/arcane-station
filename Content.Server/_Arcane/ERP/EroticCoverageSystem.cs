@@ -21,8 +21,14 @@ public sealed class EroticCoverageSystem : EntitySystem
     public override void Initialize()
     {
         base.Initialize();
+        SubscribeLocalEvent<HumanoidAppearanceComponent, EroticOrgansSpawnedEvent>(OnOrgansSpawned);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ClothingDidEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ClothingDidUnequippedEvent>(OnUnequipped);
+    }
+
+    private void OnOrgansSpawned(EntityUid uid, HumanoidAppearanceComponent _, EroticOrgansSpawnedEvent args)
+    {
+        RefreshOrganVisibility(uid);
     }
 
     private void OnEquipped(EntityUid uid, HumanoidAppearanceComponent _, ref ClothingDidEquippedEvent args)
