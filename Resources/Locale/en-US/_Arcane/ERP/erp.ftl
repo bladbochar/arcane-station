@@ -1,7 +1,7 @@
 humanoid-profile-editor-erp-preference-label = ERP
 humanoid-profile-editor-erp-preference-yes = Yes
 humanoid-profile-editor-erp-preference-ask = Ask
-humanoid-profile-editor-erp-preference-no = No
+humanoid-profile-editor-erp-preference-no = Disabled
 
 erp-examine-verb-text = ERP Status
 erp-examine-verb-disabled = Too far away

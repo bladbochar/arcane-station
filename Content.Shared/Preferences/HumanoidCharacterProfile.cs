@@ -735,6 +735,7 @@ namespace Content.Shared.Preferences
             if (NsfwLinksFlavorText != other.NsfwLinksFlavorText) return false;
             if (NsfwTagsFlavorText != other.NsfwTagsFlavorText) return false;
             // Orion-End
+            if (ErpPreference != other.ErpPreference) return false; // Arcane-edit
             return Appearance.MemberwiseEquals(other.Appearance);
         }
 
@@ -962,6 +963,14 @@ namespace Content.Shared.Preferences
                 _ => PreferenceUnavailableMode.StayInLobby // Invalid enum values.
             };
 
+            var erpPreference = ErpPreference switch
+            {
+                ErpPreference.Yes => ErpPreference.Yes,
+                ErpPreference.Ask => ErpPreference.Ask,
+                ErpPreference.No => ErpPreference.No,
+                _ => ErpPreference.Ask // Invalid enum values.
+            };
+
             var spawnPriority = SpawnPriority switch
             {
                 SpawnPriorityPreference.None => SpawnPriorityPreference.None,
@@ -1021,6 +1030,7 @@ namespace Content.Shared.Preferences
             Gender = gender;
             Appearance = appearance;
             SpawnPriority = spawnPriority;
+            ErpPreference = erpPreference; // Arcane-edit
 
             _jobPriorities.Clear();
 
@@ -1156,6 +1166,7 @@ namespace Content.Shared.Preferences
             hashCode.Add(BarkVoice); // Goob Station - Barks
             hashCode.Add((int) SpawnPriority);
             hashCode.Add((int) PreferenceUnavailable);
+            hashCode.Add((int) ErpPreference); // Arcane-edit
             return hashCode.ToHashCode();
         }
 
