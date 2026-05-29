@@ -1,0 +1,17 @@
+marking-HumanHairManLong = Мужская длинная
+marking-HumanHairShortMullet = Укороченный маллет
+marking-HumanHairBobStrand = Каре с прядью
+marking-HumanHairBraidCrookedBangs = Коса с кривой чёлкой
+marking-HumanHairDreadlocksShortTale = Дреды с коротким хвостиком
+marking-HumanHairDreadlocksShort = Короткие дреды
+marking-HumanHairDreadlocksTale = Дреды с хвостом
+marking-HumanHairGakupo = Гакупо
+marking-HumanHairLongStraight = Длинные прямые
+marking-HumanHairManBunBob = Мужской пучок с каре
+marking-HumanHairNeru = Неру
+marking-HumanHairPinkamina = Пинкамина
+marking-HumanHairPrincess = Принцесса
+marking-HumanHairSpider = Паук
+marking-HumanHairTaleBang = Чёлка и хвост
+marking-HumanHairTale = Хвостик
+marking-HumanHairTwilight = Твайлайт

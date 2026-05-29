@@ -42,7 +42,7 @@ marking-RodentiaHeadTopEarMouse-mouse = Outer ear
 marking-RodentiaHeadTopEarMouse-mouse_overlay = Inner ear
 
 marking-RodentiaHeadTopEarMouseLarge = Ears - Mouse (Large)
-marking-RodentiaHeadTopEarMouseLarge-mouse_large = Outer 
+marking-RodentiaHeadTopEarMouseLarge-mouse_large = Outer
 marking-RodentiaHeadTopEarMouseLarge-mouse_large_overlay = Inner ear
 
 marking-RodentiaHeadTopEarNone = Ears - Hidden
@@ -210,3 +210,8 @@ marking-RodentiaFootLeftBasic-l_foot = Foot
 
 marking-RodentiaFootRightBasic = Right Foot - Basic
 marking-RodentiaFootRightBasic-r_foot = Foot
+
+# Arcane - Start
+marking-RodentiaHeadTopMouseEars2 = Mouse (alt)
+marking-RodentiaTailMouse2 = Mouse (alt)
+# Arcane - End

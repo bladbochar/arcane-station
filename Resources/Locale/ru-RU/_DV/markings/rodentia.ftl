@@ -136,3 +136,7 @@ marking-RodentiaFootLeftBasic = Левая стопа
 marking-RodentiaFootLeftBasic-l_foot = Основной
 marking-RodentiaFootRightBasic = Правая стопа
 marking-RodentiaFootRightBasic-r_foot = Основной
+# Arcane - Start
+marking-RodentiaHeadTopMouseEars2 = Мышь (альт)
+marking-RodentiaTailMouse2 = Мышь (альт)
+# Arcane - End

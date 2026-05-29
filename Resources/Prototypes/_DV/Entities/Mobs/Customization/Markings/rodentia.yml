@@ -141,6 +141,17 @@
     - sprite: _DV/Mobs/Customization/Rodentia/ear_markings.rsi
       state: small
 
+# Arcane - Start
+- type: marking
+  id: RodentiaHeadTopMouseEars2
+  markingCategory: HeadTop
+  bodyPart: HeadTop
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _Arcane/Mobs/Customization/Rodentia/ears.rsi
+      state: mouse_ears
+# Arcane - End
+
 ## SNOUTS
 
 - type: marking
@@ -398,6 +409,17 @@
       state: squirrel
     - sprite: _DV/Mobs/Customization/Rodentia/tail_markings.rsi
       state: squirrel_overlay
+
+# Arcane - Start
+- type: marking
+  id: RodentiaTailMouse2
+  markingCategory: Tail
+  bodyPart: Tail
+  speciesRestriction: [Rodentia]
+  sprites:
+    - sprite: _Arcane/Mobs/Customization/Rodentia/tail.rsi
+      state: mouse_tail
+# Arcane - End
 
 ## PATTERNS
 

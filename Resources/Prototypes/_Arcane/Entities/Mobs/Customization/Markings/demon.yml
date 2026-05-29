@@ -367,6 +367,42 @@
     state: horns_slim
 
 - type: marking
+  id: DemonHornsDiadema
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Demon]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/Demon/markings.rsi
+    state: diadema
+
+- type: marking
+  id: DemonHornsHeart
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Demon]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/Demon/markings.rsi
+    state: heart
+
+- type: marking
+  id: DemonHornsPretzel
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Demon]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/Demon/markings.rsi
+    state: pretzel
+
+- type: marking
+  id: DemonHornsSmallAlt
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Demon]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/Demon/markings.rsi
+    state: small_horns_alt
+
+- type: marking
   id: DemonGoatee
   bodyPart: FacialHair
   markingCategory: FacialHair
