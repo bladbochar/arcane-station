@@ -24,5 +24,3 @@ markings-category-Snout = Морда
 markings-category-Chest = Грудь
 markings-category-Tail = Хвост
 markings-category-Overlay = Наложение
-# Arcane
-markings-category-Tracheas = Трахеи
