@@ -1,10 +1,11 @@
-using Content.Server.Chat.Systems;
+﻿using Content.Server.Chat.Systems;
 using Content.Server.Interaction;
 using Content.Shared._Arcane.ERP;
 using Content.Shared._Arcane.ErpPanel;
 using Content.Shared.Chat;
 using Content.Shared.Humanoid;
 using Content.Shared.IdentityManagement;
+using Content.Shared.Popups;
 using Content.Shared.Verbs;
 using Robust.Server.Audio;
 using Robust.Server.GameObjects;
@@ -21,6 +22,7 @@ public sealed partial class ErpPanelSystem : EntitySystem
 {
     [Dependency] private readonly SharedUserInterfaceSystem _ui = default!;
     [Dependency] private readonly InteractionSystem _interaction = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IGameTiming _ticking = default!;
@@ -125,6 +127,14 @@ public sealed partial class ErpPanelSystem : EntitySystem
 
         ProccessMessages(user, target, interaction);
         ProccessSounds(user, interaction);
+
+        if (user == target
+            && interaction.TargetArouse > 0
+            && TryComp<ArousalComponent>(target, out var targetArousal)
+            && _arousal.IsRefractory(targetArousal))
+        {
+            _popup.PopupEntity(Loc.GetString("erp-refractory-self"), target, user, PopupType.SmallCaution);
+        }
 
         _arousal.AddArousal(target, interaction.TargetArouse * customArousal / 100);
         ProccessMoan(target, customMoaning);
