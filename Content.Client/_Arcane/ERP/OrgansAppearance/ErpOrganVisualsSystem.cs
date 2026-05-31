@@ -5,7 +5,8 @@ using Content.Shared._Arcane.ERP.OrgansAppearance;
 using Content.Shared._Arcane.ERP.Preferences;
 using Content.Shared._Shitmed.Humanoid.Events;
 using Content.Shared.Humanoid;
-using System.Numerics;
+using Content.Shared.Inventory;
+using Content.Shared.Inventory.Events;
 using Robust.Client.GameObjects;
 using Robust.Shared.Maths;
 using Robust.Shared.Utility;
@@ -15,55 +16,55 @@ namespace Content.Client._Arcane.ERP.OrgansAppearance;
 public sealed class ErpOrganVisualsSystem : EntitySystem
 {
     [Dependency] private readonly SpriteSystem _sprite = default!;
+    [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly ClientErpOrganPreferencesManager _erpPrefs = default!;
     [Dependency] private readonly IClientPreferencesManager _prefs = default!;
 
-    private enum OrganLayer : byte
+    private static readonly Dictionary<string, string> SlotToLayer = new()
     {
-        Penis,
-        Vagina,
-        Breasts,
-        Testicles,
-        Anus,
-        Butt,
-    }
-
-    private static readonly Dictionary<string, OrganLayer> SlotToLayer = new()
-    {
-        [ErpOrganSlots.Penis]     = OrganLayer.Penis,
-        [ErpOrganSlots.Vagina]    = OrganLayer.Vagina,
-        [ErpOrganSlots.Breasts]   = OrganLayer.Breasts,
-        [ErpOrganSlots.Testicles] = OrganLayer.Testicles,
-        [ErpOrganSlots.Anus]      = OrganLayer.Anus,
-        [ErpOrganSlots.Butt]      = OrganLayer.Butt,
+        [ErpOrganSlots.Penis]     = "erp_penis",
+        [ErpOrganSlots.Vagina]    = "erp_vagina",
+        [ErpOrganSlots.Breasts]   = "erp_breasts",
+        [ErpOrganSlots.Testicles] = "erp_testicles",
+        [ErpOrganSlots.Anus]      = "erp_anus",
+        [ErpOrganSlots.Butt]      = "erp_butt",
     };
 
-    private static readonly Dictionary<string, Sex[]> SlotSexFilter = new()
-    {
-        [ErpOrganSlots.Penis]     = [Sex.Male, Sex.Futanari],
-        [ErpOrganSlots.Testicles] = [Sex.Male, Sex.Futanari],
-        [ErpOrganSlots.Vagina]    = [Sex.Female, Sex.Futanari],
-        [ErpOrganSlots.Breasts]   = [Sex.Female, Sex.Futanari],
-    };
+    private static readonly string[] GroinSlots = ["underwear", "jumpsuit", "outerClothing"];
+    private static readonly string[] ChestSlots = ["undershirt", "jumpsuit", "outerClothing"];
 
-    private static readonly Dictionary<string, HumanoidVisualLayers> OrganCoverageLayer = new()
+    private static readonly Dictionary<string, string[]> OrganCoveringSlots = new()
     {
-        [ErpOrganSlots.Penis]     = HumanoidVisualLayers.Groin,
-        [ErpOrganSlots.Vagina]    = HumanoidVisualLayers.Groin,
-        [ErpOrganSlots.Testicles] = HumanoidVisualLayers.Groin,
-        [ErpOrganSlots.Anus]      = HumanoidVisualLayers.Groin,
-        [ErpOrganSlots.Butt]      = HumanoidVisualLayers.Groin,
-        [ErpOrganSlots.Breasts]   = HumanoidVisualLayers.Chest,
+        [ErpOrganSlots.Penis]     = GroinSlots,
+        [ErpOrganSlots.Vagina]    = GroinSlots,
+        [ErpOrganSlots.Testicles] = GroinSlots,
+        [ErpOrganSlots.Anus]      = GroinSlots,
+        [ErpOrganSlots.Butt]      = GroinSlots,
+        [ErpOrganSlots.Breasts]   = ChestSlots,
     };
 
     private static readonly Dictionary<string, string> OrganRsiPath = new()
     {
-        [ErpOrganSlots.Penis] = "/Textures/_Arcane/ERP/Mobs/penis_onmob.rsi",
-        [ErpOrganSlots.Vagina] = "/Textures/_Arcane/ERP/Mobs/vagina_onmob.rsi",
-        [ErpOrganSlots.Breasts] = "/Textures/_Arcane/ERP/Mobs/breasts_onmob.rsi",
+        [ErpOrganSlots.Penis]     = "/Textures/_Arcane/ERP/Mobs/penis_onmob.rsi",
+        [ErpOrganSlots.Vagina]    = "/Textures/_Arcane/ERP/Mobs/vagina_onmob.rsi",
         [ErpOrganSlots.Testicles] = "/Textures/_Arcane/ERP/Mobs/testicles_onmob.rsi",
-        [ErpOrganSlots.Butt] = "/Textures/_Arcane/ERP/Mobs/butt_onmob.rsi",
-        [ErpOrganSlots.Anus] = "/Textures/_Arcane/ERP/Mobs/anus_onmob.rsi",
+        [ErpOrganSlots.Butt]      = "/Textures/_Arcane/ERP/Mobs/butt_onmob.rsi",
+        [ErpOrganSlots.Anus]      = "/Textures/_Arcane/ERP/Mobs/anus_onmob.rsi",
+    };
+
+    private const string BreastsRsiBase = "/Textures/_Arcane/ERP/Mobs/Breasts/";
+    private const string BreastsRsiFallback = BreastsRsiBase + "human.rsi";
+
+    private static readonly Dictionary<string, string> SpeciesBreastRsi = new()
+    {
+        ["Human"]       = BreastsRsiBase + "human.rsi",
+        ["Dwarf"]       = BreastsRsiBase + "human.rsi",
+        ["Reptilian"]   = BreastsRsiBase + "lizard.rsi",
+        ["Moth"]        = BreastsRsiBase + "moth.rsi",
+        ["Tajaran"]     = BreastsRsiBase + "tajaran.rsi",
+        ["Arachnid"]    = BreastsRsiBase + "arachnid.rsi",
+        ["Demon"]       = BreastsRsiBase + "demon.rsi",
+        ["HumanoidXeno"] = BreastsRsiBase + "xenos.rsi",
     };
 
     private ISawmill _log = default!;
@@ -76,8 +77,9 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
         SubscribeLocalEvent<ErpOrganVisualsComponent, AfterAutoHandleStateEvent>(OnOrganState);
         SubscribeLocalEvent<ErpOrganVisualsComponent, ComponentShutdown>(OnOrganShutdown);
 
-        // Clothing equipped/unequipped → HiddenLayers changed → update visibility
         SubscribeLocalEvent<HumanoidAppearanceComponent, HumanoidVisualStateUpdatedEvent>(OnHumanoidState);
+        SubscribeLocalEvent<ErpOrganVisualsComponent, DidEquipEvent>(OnInventoryChanged);
+        SubscribeLocalEvent<ErpOrganVisualsComponent, DidUnequipEvent>(OnInventoryChanged);
 
         // Editor preview: client-side dummy entity, no server state
         SubscribeLocalEvent<HumanoidAppearanceComponent, ProfileLoadFinishedEvent>(OnPreviewProfileLoaded);
@@ -122,7 +124,7 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
         var result = new Dictionary<string, ErpOrganConfig>();
         foreach (var (slotId, cfg) in organs)
         {
-            if (SlotSexFilter.TryGetValue(slotId, out var allowed) && Array.IndexOf(allowed, sex) < 0)
+            if (ErpOrganSlots.SexFilter.TryGetValue(slotId, out var allowed) && Array.IndexOf(allowed, sex) < 0)
                 continue;
             result[slotId] = cfg;
         }
@@ -146,7 +148,18 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
         if (!HasComp<ErpOrganVisualsComponent>(ent))
             return;
 
-        if (!TryComp<SpriteComponent>(ent, out var sprite))
+        UpdateOrganVisibility(ent);
+    }
+
+    private void OnInventoryChanged(Entity<ErpOrganVisualsComponent> ent, ref DidEquipEvent args)
+        => UpdateOrganVisibility(ent);
+
+    private void OnInventoryChanged(Entity<ErpOrganVisualsComponent> ent, ref DidUnequipEvent args)
+        => UpdateOrganVisibility(ent);
+
+    private void UpdateOrganVisibility(EntityUid uid)
+    {
+        if (!TryComp<SpriteComponent>(uid, out var sprite))
             return;
 
         foreach (var slotId in ErpOrganSlots.All)
@@ -154,10 +167,10 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
             if (!SlotToLayer.TryGetValue(slotId, out var layerKey))
                 continue;
 
-            if (!_sprite.LayerMapTryGet((ent, sprite), layerKey, out var index, false))
+            if (!_sprite.LayerMapTryGet((uid, sprite), layerKey, out var index, false))
                 continue;
 
-            _sprite.LayerSetVisible((ent, sprite), index, IsOrganVisible(slotId, ent.Comp));
+            _sprite.LayerSetVisible((uid, sprite), index, IsOrganVisible(slotId, uid));
         }
     }
 
@@ -166,69 +179,80 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
         if (!TryComp<SpriteComponent>(ent, out var sprite))
             return;
 
-        foreach (var layerKey in Enum.GetValues<OrganLayer>())
-            _sprite.RemoveLayer((ent, sprite), layerKey, logMissing: false);
+        foreach (var layerKey in SlotToLayer.Values)
+        {
+            if (_sprite.LayerMapTryGet((ent, sprite), layerKey, out var index, false))
+                _sprite.LayerSetVisible((ent, sprite), index, false);
+        }
     }
 
     private void ApplyOrganLayers(Entity<ErpOrganVisualsComponent> ent, HumanoidAppearanceComponent? humanoid, SpriteComponent sprite)
     {
         foreach (var slotId in ErpOrganSlots.All)
         {
+            if (slotId == ErpOrganSlots.Butt) // Disabled for now since it needs better icons.
+                continue;
+
             if (!SlotToLayer.TryGetValue(slotId, out var layerKey))
                 continue;
-            if (!OrganRsiPath.TryGetValue(slotId, out var rsiPath))
+
+            string rsiPath;
+            if (slotId == ErpOrganSlots.Breasts)
+            {
+                var species = humanoid?.Species ?? string.Empty;
+                rsiPath = SpeciesBreastRsi.TryGetValue(species, out var r) ? r : BreastsRsiFallback;
+            }
+            else if (!OrganRsiPath.TryGetValue(slotId, out rsiPath!))
                 continue;
 
             if (!ent.Comp.Organs.TryGetValue(slotId, out var cfg))
             {
-                // Organ not present on this character — hide layer if it was added previously
                 if (_sprite.LayerMapTryGet((ent, sprite), layerKey, out var hiddenIdx, false))
                     _sprite.LayerSetVisible((ent, sprite), hiddenIdx, false);
                 continue;
             }
 
-            var stateName = BuildStateName(slotId, cfg);
-            var visible = IsOrganVisible(slotId, humanoid);
+            var stateName = BuildStateName(slotId, cfg, humanoid?.Species);
+            var visible = IsOrganVisible(slotId, ent.Owner);
             _log.Debug($"layer {slotId} state={stateName} visible={visible}");
 
             if (!_sprite.LayerMapTryGet((ent, sprite), layerKey, out var index, false))
-                index = _sprite.LayerMapReserve((ent, sprite), layerKey);
+                continue;
 
             _sprite.LayerSetRsi((ent, sprite), index, new ResPath(rsiPath), stateName);
             _sprite.LayerSetColor((ent, sprite), index, cfg.Color ?? humanoid?.SkinColor ?? Color.FromHex("#C0967F"));
-            _sprite.LayerSetScale((ent, sprite), index, BuildOrganScale(slotId, cfg));
             _sprite.LayerSetVisible((ent, sprite), index, visible);
         }
     }
 
-    private static bool IsOrganVisible(string slotId, HumanoidAppearanceComponent? humanoid)
+    private bool IsOrganVisible(string slotId, EntityUid uid)
     {
-        if (humanoid == null)
+        if (!OrganCoveringSlots.TryGetValue(slotId, out var slots))
             return true;
 
-        if (!OrganCoverageLayer.TryGetValue(slotId, out var coverageLayer))
-            return true;
+        foreach (var slot in slots)
+        {
+            if (_inventory.TryGetSlotEntity(uid, slot, out _))
+                return false;
+        }
 
-        return !humanoid.HiddenLayers.ContainsKey(coverageLayer)
-            && !humanoid.PermanentlyHidden.Contains(coverageLayer);
+        return true;
     }
 
-    private static string BuildStateName(string slotId, ErpOrganConfig cfg)
+    private static string BuildStateName(string slotId, ErpOrganConfig cfg, string? species = null)
     {
         switch (slotId)
         {
             case ErpOrganSlots.Breasts:
-                var bVariant = cfg.Variant is "human" or "pair" or "" ? "pair" : cfg.Variant;
-                var szLetter = cfg.Size >= 1 && cfg.Size <= 8
-                    ? ((char) ('a' + cfg.Size - 1)).ToString()
-                    : "a";
-                return $"breasts_{bVariant}_{szLetter}_0_FRONT";
+                if (species == "HumanoidXeno")
+                    return cfg.Size switch { 1 => "a", 2 => "b", _ => "c" };
+                return cfg.Size switch { 1 => "aa", 2 => "b", 3 => "c", _ => "d" };
             case ErpOrganSlots.Butt:
                 return $"butt_pair_{Math.Clamp(cfg.Size, 1, 5)}_0_FRONT";
             case ErpOrganSlots.Testicles:
                 return "testicles_single_2_0_FRONT";
             case ErpOrganSlots.Anus:
-                var aVariant = cfg.Variant is "human" or "" ? "donut" : cfg.Variant;
+                var aVariant = cfg.Variant is "" or "human" ? "donut" : cfg.Variant; // "human" = legacy default, map to first real variant
                 return $"anus_{aVariant}_3_0_FRONT";
             case ErpOrganSlots.Vagina:
                 return $"vagina_{cfg.Variant}_1_0_FRONT";
@@ -237,22 +261,4 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
         }
     }
 
-    private static Vector2 BuildOrganScale(string slotId, ErpOrganConfig cfg)
-    {
-        switch (slotId)
-        {
-            case ErpOrganSlots.Penis:
-                return new Vector2(
-                    1f + (cfg.Size - 3) * 0.04f,
-                    0.4f + cfg.Size * 0.2f);
-            case ErpOrganSlots.Testicles:
-                var ts = 0.7f + (cfg.Size - 1) * 0.15f;
-                return new Vector2(ts, ts);
-            case ErpOrganSlots.Anus:
-                var as_ = 1f + (cfg.Size - 3) * 0.1f;
-                return new Vector2(as_, as_);
-            default:
-                return Vector2.One;
-        }
-    }
 }

@@ -9,33 +9,6 @@ namespace Content.Client._Arcane.ERP.UI;
 
 public sealed class ErpOrganSection : BoxContainer
 {
-    private static readonly Dictionary<string, string[]> OrganVariants = new()
-    {
-        [ErpOrganSlots.Penis]     = ["human", "knotted", "barbknot", "flared", "tentacle", "hemi", "hemiknot", "tapered", "thick"],
-        [ErpOrganSlots.Vagina]    = ["human", "gaping", "tentacle", "dentata", "hairy", "furred", "spade", "cloaca"],
-        [ErpOrganSlots.Breasts]   = ["pair", "quad", "sextuple"],
-        [ErpOrganSlots.Testicles] = ["single"],
-        [ErpOrganSlots.Anus]      = ["donut", "squished"],
-    };
-
-    // Max size per slot (slider range 1..N)
-    private static readonly Dictionary<string, int> OrganMaxSize = new()
-    {
-        [ErpOrganSlots.Penis]     = 5,
-        [ErpOrganSlots.Breasts]   = 8,
-        [ErpOrganSlots.Testicles] = 5,
-        [ErpOrganSlots.Butt]      = 5,
-        [ErpOrganSlots.Anus]      = 9,
-    };
-
-    private static readonly Dictionary<string, Sex[]> SlotSexFilter = new()
-    {
-        [ErpOrganSlots.Penis]     = [Sex.Male, Sex.Futanari],
-        [ErpOrganSlots.Testicles] = [Sex.Male, Sex.Futanari],
-        [ErpOrganSlots.Vagina]    = [Sex.Female, Sex.Futanari],
-        [ErpOrganSlots.Breasts]   = [Sex.Female, Sex.Futanari],
-    };
-
     private ErpOrganPreferences _prefs = ErpOrganPreferences.Default();
     private bool _settingPreferences;
 
@@ -84,9 +57,8 @@ public sealed class ErpOrganSection : BoxContainer
                 VAlign = Label.VAlignMode.Center,
             });
 
-            // Variant dropdown (not for anus — only one variant)
             OptionButton? variantBtn = null;
-            if (OrganVariants.TryGetValue(slotId, out var variants))
+            if (ErpOrganSlots.Variants.TryGetValue(slotId, out var variants))
             {
                 variantBtn = new OptionButton { MinWidth = 120 };
                 foreach (var v in variants)
@@ -104,7 +76,7 @@ public sealed class ErpOrganSection : BoxContainer
             // Size slider
             Slider? sizeSlider = null;
             Label? sizeLabel = null;
-            if (OrganMaxSize.TryGetValue(slotId, out var maxSize))
+            if (ErpOrganSlots.MaxSize.TryGetValue(slotId, out var maxSize))
             {
                 sizeLabel = new Label
                 {
@@ -178,7 +150,7 @@ public sealed class ErpOrganSection : BoxContainer
     {
         foreach (var (slotId, ctrl) in _organControls)
         {
-            ctrl.Container.Visible = !SlotSexFilter.TryGetValue(slotId, out var allowed)
+            ctrl.Container.Visible = !ErpOrganSlots.SexFilter.TryGetValue(slotId, out var allowed)
                 || Array.IndexOf(allowed, sex) >= 0;
         }
     }
@@ -199,7 +171,7 @@ public sealed class ErpOrganSection : BoxContainer
 
                 if (ctrl.Variant != null)
                 {
-                    var variants = OrganVariants.TryGetValue(slotId, out var v) ? v : [];
+                    var variants = ErpOrganSlots.Variants.TryGetValue(slotId, out var v) ? v : [];
                     var idx = Array.IndexOf(variants, cfg.Variant);
                     ctrl.Variant.SelectId(idx >= 0 ? idx : 0);
                 }
@@ -228,7 +200,7 @@ public sealed class ErpOrganSection : BoxContainer
         if (!_organControls.TryGetValue(slotId, out var ctrl))
             return;
 
-        var variants = OrganVariants.TryGetValue(slotId, out var v) ? v : [];
+        var variants = ErpOrganSlots.Variants.TryGetValue(slotId, out var v) ? v : [];
         var variantIdx = ctrl.Variant?.SelectedId ?? 0;
         var variant = variantIdx < variants.Length ? variants[variantIdx] : "human";
 
