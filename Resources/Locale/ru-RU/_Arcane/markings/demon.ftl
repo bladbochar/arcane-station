@@ -51,3 +51,4 @@ marking-DemonChestTrinitySpots = Грудь метки суккуба
 marking-SuccubusWingsDemon = Крылья
 marking-SuccubusWingsDemonAnimated = Крылья (анимированные)
 marking-SuccubusWingsDemonTwo = Крылья приподнятые
+marking-SuccubusWingsWithTail = Суккубус

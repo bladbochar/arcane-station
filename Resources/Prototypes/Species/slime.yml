@@ -54,6 +54,7 @@
     FacialHair: MobSlimeMarkingFollowSkin
 #    Underwear: MobHumanoidAnyMarking # Orion-Edit: Removed
 #    Undershirt: MobHumanoidAnyMarking # Orion-Edit: Removed
+    Wings: MobHumanoidAnyMarking # Arcane
     Chest: MobSlimeChest
     Groin: MobSlimeGroin
     Eyes: MobHumanoidEyes
