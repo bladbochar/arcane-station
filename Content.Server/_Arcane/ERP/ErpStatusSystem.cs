@@ -18,7 +18,7 @@ public sealed class ErpStatusSystem : EntitySystem
 
     private void OnPlayerAttached(Entity<HumanoidAppearanceComponent> ent, ref PlayerAttachedEvent args)
     {
-        var profile = _prefs.GetPreferences(args.Player.UserId).SelectedCharacter as HumanoidCharacterProfile;
+        var profile = _prefs.GetPreferencesOrNull(args.Player.UserId)?.SelectedCharacter as HumanoidCharacterProfile;
         var preference = profile?.ErpPreference ?? ErpPreference.Ask;
 
         EnsureComp<ArousalComponent>(ent);
