@@ -1,0 +1,82 @@
+# Tail
+
+- type: marking
+  id: HumanoidXenoTailDrone
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: tail_drone
+
+# Head
+
+- type: marking
+  id: HumanoidXenoHeadDrone
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: head_m
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: teeth_drone
+
+- type: marking
+  id: HumanoidXenoHeadSpitter
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: spitter_head
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: spitter_teeth
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: spitter_veins
+
+- type: marking
+  id: HumanoidXenoHeadPretor
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: pretor_head
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: pretor_teeth
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: pretor_shine
+
+- type: marking
+  id: HumanoidXenoHeadQueen
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: queen_head
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: queen_teeth
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: queen_shine
+
+# Chest overlays
+
+- type: marking
+  id: HumanoidXenoHeadShine
+  bodyPart: Head
+  markingCategory: HeadTop
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: shine
+
+- type: marking
+  id: HumanoidXenoChestTubes
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: tubes_drone

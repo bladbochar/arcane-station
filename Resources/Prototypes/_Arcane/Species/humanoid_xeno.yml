@@ -1,0 +1,172 @@
+- type: species
+  id: HumanoidXeno
+  name: species-name-xeno
+  roundStart: true
+  prototype: MobHumanoidXeno
+  sprites: MobHumanoidXenoSprites
+  markingLimits: MobHumanoidXenoMarkingLimits
+  dollPrototype: MobXenoDummy
+  skinColoration: Hues
+  maleFirstNames: names_xeno_first
+  femaleFirstNames: names_xeno_first
+  lastNames: names_xeno_last
+  sexes: [Unsexed, Male, Female]
+  category: Unusual
+  description: "/ServerInfo/_Arcane/SpeciesDescriptions/HumanoidXeno.xml"
+  defaultHeight: 1.1
+  defaultWidth: 1.2
+  maxHeight: 1.15
+  maxWidth: 1.25
+  minHeight: 0.95
+  minWidth: 1.05
+  pros:
+  - Иммунитет к давлению открытого космоса.
+  - Кислотная кровь — ранения обжигают всех, кроме ксеноморфов.
+  - Получают на 4 единицы меньше тупого урона.
+  - Ночное видение.
+  - Порог выносливости увеличен до 125.
+  cons:
+  - Получают на 25% больше электрического урона.
+  - Получают на 20% больше теплового урона.
+  - Получают на 10% больше холодного урона.
+  - Получают на 5% больше колющего урона.
+
+- type: speciesBaseSprites
+  id: MobHumanoidXenoSprites
+  sprites:
+    Special: MobHumanoidAnyMarking
+    Head: MobHumanoidXenoHead
+    Hair: MobHumanoidAnyMarking
+    FacialHair: MobHumanoidAnyMarking
+    Face: MobHumanoidAnyMarking
+    Snout: MobHumanoidAnyMarking
+    Eyes: MobHumanoidAnyMarking
+    Chest: MobHumanoidXenoTorso
+    Groin: MobHumanoidXenoTorso
+    HeadTop: MobHumanoidAnyMarking
+    HeadSide: MobHumanoidAnyMarking
+    Tail: MobHumanoidAnyMarking
+    Wings: MobHumanoidAnyMarking
+    LArm: MobHumanoidXenoLArm
+    RArm: MobHumanoidXenoRArm
+    LHand: MobHumanoidXenoLHand
+    RHand: MobHumanoidXenoRHand
+    LLeg: MobHumanoidXenoLLeg
+    RLeg: MobHumanoidXenoRLeg
+    LFoot: MobHumanoidXenoLFoot
+    RFoot: MobHumanoidXenoRFoot
+
+- type: markingPoints
+  id: MobHumanoidXenoMarkingLimits
+  onlyWhitelisted: true
+  points:
+    Hair:
+      points: 0
+      required: false
+    FacialHair:
+      points: 0
+      required: false
+    Tail:
+      points: 1
+      required: true
+      defaultMarkings: [ HumanoidXenoTailDrone ]
+    Head:
+      points: 1
+      required: true
+      defaultMarkings: [ HumanoidXenoHeadDrone ]
+    HeadTop:
+      points: 1
+      required: false
+    Chest:
+      points: 1
+      required: false
+    Legs:
+      points: 1
+      required: false
+    Arms:
+      points: 1
+      required: false
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoHead
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoHeadMale
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoHeadFemale
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: head_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoTorso
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoTorsoMale
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoTorsoFemale
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: torso_m
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoLLeg
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: l_leg
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoLArm
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: l_arm
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoLHand
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: l_hand
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoLFoot
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: l_foot
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoRLeg
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: r_leg
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoRArm
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: r_arm
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoRHand
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: r_hand
+
+- type: humanoidBaseSprite
+  id: MobHumanoidXenoRFoot
+  baseSprite:
+    sprite: _Arcane/Mobs/Species/HumanoidXeno/parts.rsi
+    state: r_foot

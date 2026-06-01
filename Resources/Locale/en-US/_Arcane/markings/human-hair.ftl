@@ -1,0 +1,17 @@
+marking-HumanHairManLong = Man long
+marking-HumanHairShortMullet = Short mullet
+marking-HumanHairBobStrand = Bob with strand
+marking-HumanHairBraidCrookedBangs = Braid with crooked bang
+marking-HumanHairDreadlocksShortTale = Dreadlocks with short tale
+marking-HumanHairDreadlocksShort = Short dreadlocks
+marking-HumanHairDreadlocksTale = Dreadlocks with tale
+marking-HumanHairGakupo = Gakupo
+marking-HumanHairLongStraight = Long straight
+marking-HumanHairManBunBob = Man bun with bob
+marking-HumanHairNeru = Neru
+marking-HumanHairPinkamina = Pinkamina
+marking-HumanHairPrincess = Princess
+marking-HumanHairSpider = Spider
+marking-HumanHairTaleBang = Tale with bang
+marking-HumanHairTale = Tale
+marking-HumanHairTwilight = Twilight

@@ -24,14 +24,29 @@ public sealed partial class QuantumServerComponent : Component
     public int ScannerTier = 1;
 
     [DataField, AutoNetworkedField]
-    public float CooldownEfficiency = 1f;
+    public float CooldownMultiplier = 1f;
 
     [DataField, AutoNetworkedField]
     public float QualityBonus;
 
+    [DataField]
+    public float BaseExitDamageScale = 0.20f;
+
+    [DataField, AutoNetworkedField]
+    public float FinalExitDamageMultiplier = 1f;
+
     [DataField, AutoNetworkedField]
     public EntProtoId AvatarPrototype = "MobHuman";
 
+    /// <summary>
+    /// Crate that spawns in domain as reward when players reach goal.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public EntProtoId CompletionRewardCachePrototype = "BitrunningObjectiveCacheStructure";
+
+    /// <summary>
+    /// Crate that spawns in byteforge delivery.
+    /// </summary>
     [DataField, AutoNetworkedField]
     public EntProtoId RewardCachePrototype = "CrateBitrunSecureReward";
 

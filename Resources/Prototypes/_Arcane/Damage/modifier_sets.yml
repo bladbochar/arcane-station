@@ -1,0 +1,9 @@
+- type: damageModifierSet
+  id: HumanoidXenomorph
+  coefficients:
+    Piercing: 1.05
+    Cold: 1.1
+    Heat: 1.2
+    Shock: 1.25
+  flatReductions:
+    Blunt: 4

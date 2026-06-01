@@ -24,6 +24,7 @@
   sexes:
     - Male
     - Female
+    - Futanari # Arcane-edit
   # Orion-Start
   category: Unusual
   description: "/ServerInfo/_Orion/SpeciesDescriptions/Shadekin.xml"

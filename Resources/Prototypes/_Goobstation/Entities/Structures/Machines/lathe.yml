@@ -61,6 +61,7 @@
     - NailsStatic
     # Orion-Start
     - MegaCells
+    - PartsDynamic
     # Orion-End
     - ConstructionBagOfHolding
     - AdvancedTools
@@ -208,6 +209,7 @@
     # Orion-Start
     - BodyBagsDynamic
     - MegaCells
+    - PartsDynamic
     # Orion-End
     - AdvancedTools
     - ScienceEquipment
@@ -225,6 +227,7 @@
     - EngineeringBoards
     - SharedBoards
     - ScienceBoards
+    - ScienceBoardsGoob
     - ShuttleBoards
     - ShuttleBoardsGoob
     - MedicalBoardsGoob
@@ -306,6 +309,7 @@
     - CameraBoards
     - ServiceTools
     - ServiceBoardsGoob # goob
+    - EntertainmentPack # goob
     # Einstein Engines Packs
     - Translators
   - type: EmagLatheRecipes

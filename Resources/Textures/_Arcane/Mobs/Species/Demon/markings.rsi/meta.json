@@ -1,7 +1,7 @@
 {
     "version": 1,
     "license": "CC-BY-SA-3.0",
-    "copyright": "Created by discord:LunaLita#0840",
+    "copyright": "Created by discord:LunaLita#0840, theanemone",
     "size": {
         "x": 32,
         "y": 32
@@ -325,6 +325,22 @@
         },
         {
             "name": "bull",
+            "directions": 4
+        },
+        {
+            "name": "diadema",
+            "directions": 4
+        },
+        {
+            "name": "heart",
+            "directions": 4
+        },
+        {
+            "name": "pretzel",
+            "directions": 4
+        },
+        {
+            "name": "small_horns_alt",
             "directions": 4
         }
     ]

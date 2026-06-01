@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Discord: bulbo44kkey",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "brain"
+    },
+    {
+      "name": "heart-off"
+    },
+    {
+      "name": "kidney-l"
+    },
+    {
+      "name": "kidney-r"
+    },
+    {
+      "name": "liver"
+    },
+    {
+      "name": "lung-l"
+    },
+    {
+      "name": "lung-r"
+    },
+    {
+      "name": "stomach"
+    },
+    {
+      "name": "tongue"
+    },
+    {
+      "name": "muscle"
+    },
+    {
+      "name": "nerve"
+    },
+    {
+      "name": "vessel"
+    }
+  ]
+}

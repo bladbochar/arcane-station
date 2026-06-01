@@ -13,9 +13,11 @@
 
 - type: marking
   id: CatEars
-  bodyPart: Special
-  markingCategory: Special
-  speciesRestriction: []
+  # Arcane-start
+  bodyPart: HeadTop
+  markingCategory: HeadTop
+  speciesRestriction: [Human, Dwarf, Demon, Felinid]
+  # Arcane-end
   coloring:
     default:
       type:

@@ -9,7 +9,7 @@
   dollPrototype: MobDemonDummy
   skinColoration: Hues
   naming: firstlast
-  sexes: [Male, Female]
+  sexes: [Male, Female, Futanari]
   category: Unusual
   description: "/ServerInfo/_Arcane/SpeciesDescriptions/Demon.xml"
   pros:

@@ -1,0 +1,57 @@
+- type: panelInteraction
+  id: SuckCock
+  category: Penis
+  name: Сосать член
+  userArouse: 5
+  targetArouse: 15
+  range: 1
+  sounds:
+  - /Audio/_Arcane/Interactions/oral1.ogg
+  - /Audio/_Arcane/Interactions/oral2.ogg
+  messages:
+  - проталкивает член $target в своё горло.
+  - осторожно сосет член $target.
+  - проводит языком по члену $target во рту.
+  - нежно облизывает головку члена $target.
+  - ритмично двигает головой, лаская член $target.
+  - обхватывает губами головку члена $target и нежно посасывает.
+  - захватывает член $target губами и ритмично скользит по нему.
+  icon: _Arcane/Interface/ErpPanel/cock_tongue_fap.png
+  targetRequirements:
+  - !type:EroticOrganRequirement
+    organ: penis
+    requireVisible: true
+
+- type: panelInteraction
+  id: SlimeFuckCock
+  category: Penis
+  name: Трахать член плазмой
+  userArouse: 10
+  targetArouse: 10
+  range: 1
+  sounds:
+  - /Audio/_Arcane/Interactions/bj1.ogg
+  - /Audio/_Arcane/Interactions/bj2.ogg
+  - /Audio/_Arcane/Interactions/bj3.ogg
+  - /Audio/_Arcane/Interactions/bj4.ogg
+  - /Audio/_Arcane/Interactions/bj5.ogg
+  - /Audio/_Arcane/Interactions/bj6.ogg
+  - /Audio/_Arcane/Interactions/bj7.ogg
+  - /Audio/_Arcane/Interactions/bj8.ogg
+  - /Audio/_Arcane/Interactions/bj9.ogg
+  - /Audio/_Arcane/Interactions/bj10.ogg
+  - /Audio/_Arcane/Interactions/bj11.ogg
+  messages:
+  - насаживает член $target в свою плазму.
+  - пробивает оболочку плазмы членом $target!
+  - ритмично передвигает плазму у члена $target.
+  - ласкает головку члена $target своей плазмой.
+  icon: _Arcane/Interface/ErpPanel/cock_slime_sex.png
+  userRequirements:
+  - !type:SpeciesRequirement
+    species:
+    - SlimePerson
+  targetRequirements:
+  - !type:EroticOrganRequirement
+    organ: penis
+    requireVisible: true

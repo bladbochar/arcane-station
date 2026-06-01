@@ -39,6 +39,7 @@
   - Feroxi
   - Chitinid
   - Demon # Arcane-Edit
+  - HumanoidXeno # Arcane-Edit
   components:
   - type: RandomHumanoidAppearance
     randomizeName: false

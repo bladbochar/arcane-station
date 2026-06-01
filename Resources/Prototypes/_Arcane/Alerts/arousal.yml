@@ -1,0 +1,20 @@
+- type: alertCategory
+  id: Arousal
+
+- type: alert
+  id: ArousalAroused
+  category: Arousal
+  icons:
+  - sprite: /Textures/Interface/Alerts/hunger.rsi
+    state: peckish
+  name: alerts-arousal-aroused-name
+  description: alerts-arousal-aroused-desc
+
+- type: alert
+  id: ArousalHeated
+  category: Arousal
+  icons:
+  - sprite: /Textures/Interface/Alerts/hunger.rsi
+    state: starving
+  name: alerts-arousal-heated-name
+  description: alerts-arousal-heated-desc

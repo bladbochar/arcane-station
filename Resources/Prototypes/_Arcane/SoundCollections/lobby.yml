@@ -1,0 +1,36 @@
+- type: soundCollection
+  id: ArcaneLobbyMusic
+  files:
+    - /Audio/Lobby/space_asshole.ogg
+    - /Audio/Lobby/endless_space.ogg
+    - /Audio/Lobby/title2.ogg
+    - /Audio/Lobby/title3.ogg
+    - /Audio/Lobby/mod.flip-flap.ogg
+    - /Audio/Lobby/pwmur.ogg
+    - /Audio/Lobby/every_light_is_blinking_at_once.ogg
+    - /Audio/Lobby/Spac_Stac.ogg
+    - /Audio/Lobby/thewizard.ogg
+    - /Audio/Lobby/clownwmv.ogg
+    - /Audio/_Orion/Jukebox/DavidBowie/DavidBowie_Starman.ogg
+    - /Audio/_Orion/Jukebox/DavidBowie/DavidBowie_TheManWhoSoldTheWorld.ogg
+    - /Audio/_Orion/Jukebox/Ween/Ween_OceanMan.ogg
+    - /Audio/_Orion/Jukebox/RatBoy/RatBoy_WhosReadyForTomorrow.ogg
+    - /Audio/_Orion/Jukebox/Gorillaz/Gorillaz_ClintEastwood.ogg
+    - /Audio/_Arcane/Lobby/MrBlueSky.ogg
+    - /Audio/_Arcane/Lobby/APillToCrush.ogg
+    - /Audio/_Arcane/Lobby/FreakingOutTheNeighborhood.ogg
+    - /Audio/_Arcane/Lobby/Gold.ogg
+    - /Audio/_Arcane/Lobby/OneWayOrAnother.ogg
+    - /Audio/_Arcane/Lobby/BeLikeAWoman.ogg
+    - /Audio/_Arcane/Lobby/ComeAndGetYourLove.ogg
+    - /Audio/_Arcane/Lobby/TimeInABottle.ogg
+    - /Audio/_Arcane/Lobby/TotalControl.ogg # сумки гермес
+    - /Audio/_Arcane/Lobby/TheSummerEnds.ogg
+    - /Audio/_Arcane/Lobby/OiTakNravitsa.ogg
+    - /Audio/_Arcane/Lobby/ThisIsOurTime.ogg
+    - /Audio/_Arcane/Lobby/ItWasAGoodDay.ogg
+    - /Audio/_Arcane/Lobby/UnwelcomeSchool.ogg
+    - /Audio/_Arcane/Lobby/Daisuke.ogg
+    - /Audio/_Arcane/Lobby/VKrauMagnoliy.ogg # жених приехал
+    - /Audio/_Arcane/Lobby/Invisible.ogg
+    - /Audio/_Arcane/Lobby/InThePool.ogg

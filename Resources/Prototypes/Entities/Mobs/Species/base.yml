@@ -510,6 +510,7 @@
   - type: VisibleContraband # Goobstation
   - type: Posing # Orion
   - type: MomentumSteering # Goobstation - No steer
+  - type: ErpPanelOwner # Arcane
   - type: TTS # Art-TTS
 
 - type: entity
@@ -600,6 +601,25 @@
     - Parasite
   # </Goobstation>
   - type: Mood # Orion
+  # Arcane-start
+  - type: EroticOrgans
+    groinCommon:
+    - proto: OrganAnus
+      slot: anus
+    groinMale:
+    - proto: OrganPenis
+      slot: penis
+    - proto: OrganTesticles
+      slot: testicles
+    groinFemale:
+    - proto: OrganVagina
+      slot: vagina
+    - proto: OrganUterus
+      slot: uterus
+    chestFemale:
+    - proto: OrganBreasts
+      slot: breasts
+  # Arcane-end
 
 - type: entity
   save: false

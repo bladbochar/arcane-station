@@ -1,0 +1,7 @@
+marking-HumanoidXenoTailDrone = Drone tail
+marking-HumanoidXenoHeadDrone = Drone head
+marking-HumanoidXenoHeadSpitter = Spitter head
+marking-HumanoidXenoHeadPretor = Praetorian head
+marking-HumanoidXenoHeadQueen = Queen head
+marking-HumanoidXenoHeadShine = Head shine
+marking-HumanoidXenoChestTubes = Chest tubes

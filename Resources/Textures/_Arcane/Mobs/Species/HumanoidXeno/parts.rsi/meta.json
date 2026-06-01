@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "license": "CC-BY-SA-4.0",
+  "copyright": "Discord: bulbo44kkey",
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "states": [
+    {
+      "name": "full"
+    },
+    {
+      "name": "head_m",
+      "directions": 4
+    },
+    {
+      "name": "torso_m",
+      "directions": 4
+    },
+    {
+      "name": "l_arm",
+      "directions": 4
+    },
+    {
+      "name": "r_arm",
+      "directions": 4
+    },
+    {
+      "name": "l_hand",
+      "directions": 4
+    },
+    {
+      "name": "r_hand",
+      "directions": 4
+    },
+    {
+      "name": "l_leg",
+      "directions": 4
+    },
+    {
+      "name": "r_leg",
+      "directions": 4
+    },
+    {
+      "name": "l_foot",
+      "directions": 4
+    },
+    {
+      "name": "r_foot",
+      "directions": 4
+    },
+    {
+      "name": "shine",
+      "directions": 4
+    },
+    {
+      "name": "tail_drone",
+      "directions": 4
+    },
+    {
+      "name": "teeth_drone",
+      "directions": 4
+    },
+    {
+      "name": "tubes_drone",
+      "directions": 4
+    },
+    {
+      "name": "queen_head",
+      "directions": 4
+    },
+    {
+      "name": "queen_shine",
+      "directions": 4
+    },
+    {
+      "name": "queen_teeth",
+      "directions": 4
+    },
+    {
+      "name": "pretor_head",
+      "directions": 4
+    },
+    {
+      "name": "pretor_shine",
+      "directions": 4
+    },
+    {
+      "name": "pretor_teeth",
+      "directions": 4
+    },
+    {
+      "name": "spitter_head",
+      "directions": 4
+    },
+    {
+      "name": "spitter_teeth",
+      "directions": 4
+    },
+    {
+      "name": "spitter_veins",
+      "directions": 4
+    }
+  ]
+}

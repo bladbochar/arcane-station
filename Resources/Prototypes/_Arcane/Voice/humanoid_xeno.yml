@@ -1,0 +1,60 @@
+﻿- type: speechSounds
+  id: XenoHumanoid
+  saySound:
+    path: /Audio/_White/Voice/Talk/xenomorph.ogg
+  askSound:
+    path: /Audio/_White/Voice/Talk/xenomorph_ask.ogg
+  exclaimSound:
+    path: /Audio/_White/Voice/Talk/xenomorph_exclaim.ogg
+
+- type: emoteSounds
+  id: XenoHumanoid
+  params:
+    variation: 0.125
+  sounds:
+    Scream:
+      collection: HumanoidXenoSqeals
+    Laugh:
+      collection: HumanoidXenoScreams
+    Cough:
+      collection: HumanoidXenoScreams
+    Hiss:
+      collection: HumanoidXenoHisses
+    Roars:
+      collection: HumanoidXenoRoars
+    Growl:
+      collection: HumanoidXenoGrowls
+    Rumbles:
+      collection: HumanoidXenoRumbles
+    Crying:
+      collection: HumanoidXenoCry
+    DefaultDeathgasp:
+      collection: HumanoidXenoDeathgasp
+
+- type: emote
+  id: Roars
+  name: chat-emote-name-roars
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/scream.png
+  whitelist:
+    components:
+    - Vocal
+  chatMessages: ["chat-emote-msg-roars"]
+  chatTriggers:
+  - roars
+  - roaring
+
+- type: emote
+  id: Rumbles
+  name: chat-emote-name-rumbles
+  category: Vocal
+  available: false
+  icon: Interface/Emotes/vocal.png
+  whitelist:
+    components:
+    - Vocal
+  chatMessages: ["chat-emote-msg-rumbles"]
+  chatTriggers:
+  - rumbles
+  - rumbling

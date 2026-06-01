@@ -1,0 +1,5 @@
+- type: collectiveMind
+  id: HumanoidXenomind
+  name: collective-mind-humanoid-xeno
+  keycode: 'x'
+  color: "#44944A"

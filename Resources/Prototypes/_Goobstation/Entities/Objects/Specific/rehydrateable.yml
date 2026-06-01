@@ -171,4 +171,13 @@
   - type: Rehydratable
     possibleSpawns:
     - MobDemonRandom
+
+- type: entity
+  parent: MonkeyCube
+  id: XenoCube
+  name: xeno cube
+  components:
+  - type: Rehydratable
+    possibleSpawns:
+    - MobHumanoidXenoRandom
 # Arcane-Edit-End

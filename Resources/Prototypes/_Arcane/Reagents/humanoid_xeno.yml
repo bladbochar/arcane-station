@@ -1,0 +1,59 @@
+- type: reagent
+  id: FluorosulfuricAcidHumanoidXeno
+  name: reagent-name-fluorosulfuric-acid
+  group: Toxins
+  desc: reagent-desc-fluorosulfuric-acid
+  physicalDesc: reagent-physical-desc-strong-smelling
+  flavor: acid
+  color: "#44944A"
+  boilingPoint: 78.2
+  meltingPoint: -19.4
+  reactiveEffects:
+    Acidic:
+      methods: [ Touch ]
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:HasTag
+          tag: HumanoidXeno
+          invert: true
+        scaleByQuantity: true
+        ignoreResistances: false
+        damage:
+          types:
+            Caustic: 1
+      - !type:Emote
+        conditions:
+        - !type:HasTag
+          tag: HumanoidXeno
+          invert: true
+        emote: Scream
+        probability: 0.2
+  metabolisms:
+    Poison:
+      metabolismRate: 3.00
+      effects:
+      - !type:HealthChange
+        conditions:
+        - !type:HasTag
+          tag: HumanoidXeno
+          invert: true
+        damage:
+          types:
+            Caustic: 7
+      - !type:PopupMessage
+        conditions:
+        - !type:HasTag
+          tag: HumanoidXeno
+          invert: true
+        type: Local
+        visualType: Large
+        messages: [ "generic-reagent-effect-burning-insides" ]
+        probability: 0.33
+      - !type:Emote
+        conditions:
+        - !type:HasTag
+          tag: HumanoidXeno
+          invert: true
+        emote: Scream
+        probability: 0.25

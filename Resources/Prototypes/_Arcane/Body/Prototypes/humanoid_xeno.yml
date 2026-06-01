@@ -1,0 +1,55 @@
+- type: body
+  name: Xenomorph
+  id: HumanoidXeno
+  root: chest
+  slots:
+    head:
+      part: HeadHumanoidXeno
+      connections:
+      - chest
+      organs:
+        brain: OrganHumanoidXenoBrain
+        eyes: OrganHumanoidXenoEyes
+        tongue: OrganHumanTongue
+    chest:
+      part: ChestHumanoidXeno
+      connections:
+      - groin
+      - right arm
+      - left arm
+      organs:
+        heart: OrganHumanoidXenoHeart
+        lungs: OrganHumanoidXenoLungs
+    groin:
+      part: GroinHumanoidXeno
+      connections:
+      - right leg
+      - left leg
+      organs:
+        stomach: OrganHumanoidXenoStomach
+        liver: OrganHumanoidXenoLiver
+        kidneys: OrganHumanoidXenoKidneys
+    right arm:
+      part: RightArmHumanoidXeno
+      connections:
+      - right hand
+    left arm:
+      part: LeftArmHumanoidXeno
+      connections:
+      - left hand
+    right hand:
+      part: RightHandHumanoidXeno
+    left hand:
+      part: LeftHandHumanoidXeno
+    right leg:
+      part: RightLegHumanoidXeno
+      connections:
+      - right foot
+    left leg:
+      part: LeftLegHumanoidXeno
+      connections:
+      - left foot
+    right foot:
+      part: RightFootHumanoidXeno
+    left foot:
+      part: LeftFootHumanoidXeno

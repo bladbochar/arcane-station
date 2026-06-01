@@ -1,0 +1,79 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Made by seraphimttt, theanemone, bulbo44kkey (Discord)",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+        {
+            "name": "man_long",
+            "directions": 4
+        },
+        {
+            "name": "short_mullet",
+            "directions": 4
+        },
+        {
+            "name": "bob_strand",
+            "directions": 4
+        },
+        {
+            "name": "braid_crooked_bangs",
+            "directions": 4
+        },
+        {
+            "name": "dreadlocks_short_tale",
+            "directions": 4
+        },
+        {
+            "name": "dreadlocks_short",
+            "directions": 4
+        },
+        {
+            "name": "dreadlocks_tale",
+            "directions": 4
+        },
+        {
+            "name": "gakupo",
+            "directions": 4
+        },
+        {
+            "name": "long_straight",
+            "directions": 4
+        },
+        {
+            "name": "man_bun_bob",
+            "directions": 4
+        },
+        {
+            "name": "neru",
+            "directions": 4
+        },
+        {
+            "name": "pinkamina",
+            "directions": 4
+        },
+        {
+            "name": "princess",
+            "directions": 4
+        },
+        {
+            "name": "spider",
+            "directions": 4
+        },
+        {
+            "name": "tale_bang",
+            "directions": 4
+        },
+        {
+            "name": "tale",
+            "directions": 4
+        },
+        {
+            "name": "twilight",
+            "directions": 4
+        }
+    ]
+}

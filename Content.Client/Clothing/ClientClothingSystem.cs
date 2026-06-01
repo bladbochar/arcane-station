@@ -337,6 +337,7 @@ public sealed class ClientClothingSystem : ClothingSystem
                         displacementData = inventory.MaleDisplacements.GetValueOrDefault(slot);
                     break;
                 case Sex.Female:
+                case Sex.Futanari: // Arcane-edit
                     if (inventory.FemaleDisplacements.Count > 0)
                         displacementData = inventory.FemaleDisplacements.GetValueOrDefault(slot);
                     break;

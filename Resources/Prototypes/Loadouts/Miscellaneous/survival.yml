@@ -138,6 +138,7 @@
     - Chitinid # DeltaV
     - Shadowkin
     - Demon # Arcane-Edit
+    - HumanoidXeno # Arcane-Edit
 
 # Goobstation start
 - type: loadoutEffectGroup
@@ -217,6 +218,7 @@
     - Tajaran
     - Shadowkin
     - Demon # Arcane-Edit
+    - HumanoidXeno # Arcane-Edit
 
 - type: loadoutEffectGroup
   id: OxygenBreatherMimeMoth

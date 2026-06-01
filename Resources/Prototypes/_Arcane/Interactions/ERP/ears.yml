@@ -1,0 +1,16 @@
+- type: panelInteraction
+  id: BiteEars
+  category: Ears
+  name: Укусить ухо
+  messages:
+  - кусает ухо $target!
+  - покусывает ухо $target.
+  - осторожно прикусывает ухо $target.
+  - слегка кусает $target за ухо.
+  - игриво покусывает ушко $target.
+  - прихватывает ухо $target зубами.
+  - нежно прикусывает мочку уха $target.
+  - оставляет лёгкий укус на ухе $target.
+  - внезапно кусает $target за ушко.
+  - медленно покусывает ухо $target.
+  icon: _Arcane/Interface/ErpPanel/bite_ears.png

@@ -1,0 +1,79 @@
+- type: panelInteraction
+  id: PussyFingering
+  category: Pussy
+  name: Ласкать вагину пальцами
+  userArouse: 3
+  targetArouse: 10
+  sounds:
+  - /Audio/_Arcane/Interactions/champ_fingering.ogg
+  messages:
+  - медленно проводит пальцами по влажным складкам вагины $target, слегка надавливая.
+  - нежно скользит двумя пальцами вдоль влажной щели $target, дразня клитор.
+  - уверенно погружает пальцы между влажных губ $target, лаская внутри.
+  - ритмично двигается пальцами внутри горячей и мокрой вагины $target.
+  - легко проводит подушечками пальцев по набухшему клитору $target, а затем глубже.
+  - медленно вводит два пальца в тугую влажную вагину $target, слегка сгибая их.
+  selfMessages:
+  - медленно водит пальцами по своей влажной вагине.
+  - скользит двумя пальцами вдоль своей мокрой щели, слегка проникая внутрь.
+  - ритмично ласкает себя пальцами, погружаясь в горячую влажность.
+  - нежно массирует свой набухший клитор, иногда погружая пальцы глубже.
+  - глубоко вводит пальцы в свою тугую и мокрую вагину, тихо постанывая.
+  - дразняще водит подушечками пальцев по своим влажным складкам.
+  icon: _Arcane/Interface/ErpPanel/pussy_fingering.png
+  targetRequirements:
+  - !type:EroticOrganRequirement
+    organ: vagina
+    requireVisible: true
+
+- type: panelInteraction
+  id: PussyLicking
+  category: Pussy
+  name: Ласкать вагину языком
+  userArouse: 3
+  targetArouse: 10
+  sounds:
+  - /Audio/_Arcane/Interactions/bj5.ogg
+  - /Audio/_Arcane/Interactions/bj6.ogg
+  - /Audio/_Arcane/Interactions/bj7.ogg
+  - /Audio/_Arcane/Interactions/bj8.ogg
+  - /Audio/_Arcane/Interactions/bj9.ogg
+  messages:
+  - жадно лижет влажную вагину $target.
+  - медленно проводит языком по мокрой щели $target.
+  - глубоко проникает языком внутрь киски $target.
+  - активно ласкает языком клитор $target.
+  - дразнит языком набухший клитор $target.
+  - ритмично лижет и посасывает вагину $target.
+  - скользит языком между влажных губ $target.
+  - быстро водит языком по мокрой киске $target.
+  icon: _Arcane/Interface/ErpPanel/pussy_lick.png
+  targetRequirements:
+  - !type:EroticOrganRequirement
+    organ: vagina
+    requireVisible: true
+
+- type: panelInteraction
+  id: PussyScissors
+  category: Pussy
+  name: Тереться вагиной о киску
+  userArouse: 10
+  targetArouse: 10
+  sounds:
+  - /Audio/_Arcane/Interactions/champ_fingering.ogg
+  messages:
+  - сильно трется мокрой вагиной о киску $target.
+  - ритмично водит своей киской по влажной вагине $target.
+  - плотно прижимается вагиной к клитору $target.
+  - возбуждённо скользит своей мокрой щелью по киске $target.
+  - быстро трётся клитором о киску $target.
+  - интенсивно двигается вагиной по мокрой вагине $target.
+  icon: _Arcane/Interface/ErpPanel/pussy_scissors.png
+  userRequirements:
+  - !type:EroticOrganRequirement
+    organ: vagina
+    requireVisible: true
+  targetRequirements:
+  - !type:EroticOrganRequirement
+    organ: vagina
+    requireVisible: true
