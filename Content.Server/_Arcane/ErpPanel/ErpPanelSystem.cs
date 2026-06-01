@@ -32,11 +32,6 @@ public sealed partial class ErpPanelSystem : EntitySystem
     [Dependency] private readonly TransformSystem _transform = default!;
 
     private EntProtoId _heartsProto = new("EffectHearts");
-    private Dictionary<Gender, ProtoId<SoundCollectionPrototype>> _moanSounds = new()
-    {
-        { Gender.Male, new ProtoId<SoundCollectionPrototype>("MoansMale") },
-        { Gender.Female, new ProtoId<SoundCollectionPrototype>("MoansFemale") },
-    };
 
     public override void Initialize()
     {
@@ -163,7 +158,7 @@ public sealed partial class ErpPanelSystem : EntitySystem
 
     private void MoanWithGender(EntityUid uid, Gender userHumanoid, float arousalPercent)
     {
-        var collection = _moanSounds.GetValueOrDefault(userHumanoid, _moanSounds[Gender.Female]);
+        var collection = ErpAudio.MoanSounds.GetValueOrDefault(userHumanoid, ErpAudio.MoanSounds[Gender.Female]);
 
         if (!_prototype.TryIndex(collection, out var soundCollection))
             return;

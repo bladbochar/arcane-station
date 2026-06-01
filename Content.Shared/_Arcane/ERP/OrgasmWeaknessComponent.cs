@@ -11,4 +11,7 @@ public sealed partial class OrgasmWeaknessComponent : Component
 
     [DataField, AutoNetworkedField]
     public float SpeedModifier = 0.5f;
+
+    [DataField]
+    public TimeSpan WeaknessDuration = TimeSpan.FromSeconds(2.5);
 }

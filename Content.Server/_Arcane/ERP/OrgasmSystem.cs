@@ -1,6 +1,7 @@
-﻿using Content.Server.Chat.Systems;
+using Content.Server.Chat.Systems;
 using Content.Shared._Arcane.ERP;
 using Content.Shared.Chat;
+using Content.Shared.Dataset;
 using Content.Shared.Humanoid;
 using Content.Shared.Popups;
 using System.Numerics;
@@ -26,22 +27,7 @@ public sealed class OrgasmSystem : EntitySystem
 
     private static readonly EntProtoId HeartsProto = new("EffectHearts");
     private static readonly EntProtoId SemenPuddleProto = new("PuddleSemen");
-
-    private static readonly string[] OrgasmMessages =
-    [
-        "orgasm-message-1",
-        "orgasm-message-2",
-        "orgasm-message-3",
-        "orgasm-message-4",
-        "orgasm-message-5",
-        "orgasm-message-6",
-    ];
-
-    private static readonly Dictionary<Gender, ProtoId<SoundCollectionPrototype>> MoanSounds = new()
-    {
-        { Gender.Male, new ProtoId<SoundCollectionPrototype>("MoansMale") },
-        { Gender.Female, new ProtoId<SoundCollectionPrototype>("MoansFemale") },
-    };
+    private static readonly ProtoId<LocalizedDatasetPrototype> OrgasmMessagesDataset = new("OrgasmMessages");
 
     public override void Initialize()
     {
@@ -61,7 +47,10 @@ public sealed class OrgasmSystem : EntitySystem
     {
         Spawn(HeartsProto, _transform.GetMapCoordinates(uid));
         PlayOrgasmSound(uid, gender);
-        _chat.TrySendInGameICMessage(uid, Loc.GetString(_random.Pick(OrgasmMessages)), InGameICChatType.Emote, false);
+
+        if (_prototype.TryIndex(OrgasmMessagesDataset, out var dataset))
+            _chat.TrySendInGameICMessage(uid, Loc.GetString(_random.Pick(dataset.Values)), InGameICChatType.Emote, false);
+
         _popup.PopupEntity(Loc.GetString("orgasm-popup-self"), uid, uid, PopupType.MediumCaution);
 
         if (TryComp<HumanoidAppearanceComponent>(uid, out var humanoid)
@@ -69,9 +58,8 @@ public sealed class OrgasmSystem : EntitySystem
             SpawnEjaculation(uid);
 
         var weakness = EnsureComp<OrgasmWeaknessComponent>(uid);
-        weakness.ExpiresAt = _timing.CurTime + TimeSpan.FromSeconds(2.5);
+        weakness.ExpiresAt = _timing.CurTime + weakness.WeaknessDuration;
         Dirty(uid, weakness);
-
     }
 
     private void SpawnEjaculation(EntityUid uid)
@@ -89,24 +77,15 @@ public sealed class OrgasmSystem : EntitySystem
 
     private void PlayOrgasmSound(EntityUid uid, Gender gender)
     {
-        var collection = MoanSounds.GetValueOrDefault(gender, MoanSounds[Gender.Female]);
+        var collection = ErpAudio.OrgasmSounds.GetValueOrDefault(gender, ErpAudio.OrgasmSounds[Gender.Female]);
 
-        if (!_prototype.TryIndex(collection, out var soundCollection))
-            return;
-
-        if (soundCollection.PickFiles.Count == 0)
-            return;
-
-        // Pick from the last 2-3 files — the most intense moans in the collection.
-        var count = soundCollection.PickFiles.Count;
-        var index = count - 1 + _random.Next(-2, 1);
-        index = Math.Clamp(index, 0, count - 1);
-
-        _audio.PlayPvs(new ResolvedCollectionSpecifier(collection, index), uid, new AudioParams
+        var audioParams = new AudioParams
         {
             Variation = 0.1f,
             MaxDistance = 6f,
             Volume = 3f,
-        });
+        };
+
+        _audio.PlayPvs(new SoundCollectionSpecifier(collection), uid, audioParams);
     }
 }
