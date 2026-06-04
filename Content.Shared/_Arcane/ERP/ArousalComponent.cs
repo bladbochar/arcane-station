@@ -92,7 +92,7 @@ public sealed partial class ArousalComponent : Component
         < 20f => ArousalPhase.Calm,
         < 40f => ArousalPhase.Interested,
         < 70f => ArousalPhase.Aroused,
-        < 95f => ArousalPhase.Heated,
+        < 100f => ArousalPhase.Heated,
         _ => ArousalPhase.Peak,
     };
 }
