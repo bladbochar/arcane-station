@@ -7,6 +7,7 @@ marking-HumanoidXenoTailSpitter = Хвост плевателя
 marking-HumanoidXenoTailRunner = Хвост бегуна
 marking-HumanoidXenoTailBoiler = Хвост бойлера
 marking-HumanoidXenoTailCrusher = Хвост крушителя
+marking-HumanoidXenoTailNeomprph = Хвост неоморфа
 marking-HumanoidXenoTailQueenLong = Длинный хвост королевы
 marking-HumanoidXenoHeadDrone = Голова дрона
 marking-HumanoidXenoHeadSpitter = Голова плевателя

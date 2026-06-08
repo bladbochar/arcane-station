@@ -108,6 +108,15 @@
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tails.rsi
     state: queen_long_tail_grad
 
+- type: marking
+  id: HumanoidXenoTailNeomprph
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tail.rsi
+    state: neomorph_tail
+
 # Head
 
 - type: marking
