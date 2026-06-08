@@ -27,7 +27,7 @@
 
 - type: entity
   parent: ClothingBraBase
-  id: ClothingUndershirtHeart-ShapedNippleStickers
+  id: ClothingUndershirtHeartShapedNippleStickers
   name: heart-shaped nipple stickers
   description: Heart-shaped stickers for your most perverted pleasures.
   components:

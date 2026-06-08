@@ -8,11 +8,11 @@
     },
     "states": [
         {
-        "name": "icon"
+            "name": "icon"
         },
         {
-        "name": "equipped-UNDERWEAR",
-        "directions": 4
+            "name": "equipped-UNDERWEAR",
+            "directions": 4
         }
     ]
 }
