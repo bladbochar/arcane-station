@@ -3,28 +3,24 @@
     "license": "CC-BY-SA-3.0",
     "copyright": "Made by bulbo44kkey (Discord)",
     "size": {
-        "x": 32,
-        "y": 32
+        "x": 64,
+        "y": 64
     },
     "states": [
         {
-            "name": "predalien_chest",
+            "name": "crusher_tail",
             "directions": 4
         },
         {
-            "name": "spitter_chest",
+            "name": "crusher_tail_grad",
             "directions": 4
         },
         {
-            "name": "muscles_belly",
+            "name": "queen_long_tail",
             "directions": 4
         },
         {
-            "name": "neomorph_body",
-            "directions": 4
-        },
-        {
-            "name": "unnatural_muscles_body",
+            "name": "queen_long_tail_grad",
             "directions": 4
         }
     ]

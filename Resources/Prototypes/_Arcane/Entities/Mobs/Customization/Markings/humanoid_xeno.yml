@@ -75,6 +75,48 @@
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tail.rsi
     state: runner_tail_grad
 
+- type: marking
+  id: HumanoidXenoTailBoiler
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tail.rsi
+    state: boiler_tail
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tail.rsi
+    state: boiler_tail_grad
+
+- type: marking
+  id: HumanoidXenoTailCrusher
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tails.rsi
+    state: crusher_tail
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tails.rsi
+    state: crusher_tail_grad
+
+- type: marking
+  id: HumanoidXenoTailQueenLong
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tails.rsi
+    state: queen_long_tail
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tails.rsi
+    state: queen_long_tail_grad
+
+- type: marking
+  id: HumanoidXenoTailNeomprph
+  bodyPart: Tail
+  markingCategory: Tail
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tail.rsi
+    state: neomorph_tail
+
 # Head
 
 - type: marking
@@ -172,6 +214,73 @@
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
     state: runner_shine
 
+- type: marking
+  id: HumanoidXenoHeadBoiler
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: boiler_head
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: boiler_teeth
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: boiler_veins
+
+- type: marking
+  id: HumanoidXenoHeadCrusher
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: crusher_head
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: crusher_teeth
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: crusher_shine
+
+- type: marking
+  id: HumanoidXenoHeadCarrier
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: carrier_plate
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: carrier_neck
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: carrier_teeth
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: carrier_shine
+
+- type: marking
+  id: HumanoidXenoHeadNeomorph
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: neomorph_head
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: neomorph_teeth
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: neomorph_veins
+
+- type: marking
+  id: HumanoidXenoHeadWorker
+  bodyPart: Head
+  markingCategory: Head
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: worker_head
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: worker_teeth
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/head.rsi
+    state: worker_shine
+
 # Chest
 
 - type: marking
@@ -191,6 +300,33 @@
   sprites:
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/chest.rsi
     state: spitter_chest
+
+- type: marking
+  id: HumanoidXenoChestMuscles
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/chest.rsi
+    state: muscles_belly
+
+- type: marking
+  id: HumanoidXenoChestNeomorph
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/chest.rsi
+    state: neomorph_body
+
+- type: marking
+  id: HumanoidXenoChestUnnaturalMuscles
+  bodyPart: Chest
+  markingCategory: Chest
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/chest.rsi
+    state: unnatural_muscles_body
 
 # Tracheas
 
@@ -239,6 +375,42 @@
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tracheas.rsi
     state: ravager_tubes
 
+- type: marking
+  id: HumanoidXenoTracheasBoiler
+  bodyPart: Chest
+  markingCategory: Tracheas
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tracheas.rsi
+    state: boiler_tubes
+
+- type: marking
+  id: HumanoidXenoTracheasCrusher
+  bodyPart: Chest
+  markingCategory: Tracheas
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tracheas.rsi
+    state: crusher_tubes
+
+- type: marking
+  id: HumanoidXenoTracheasNeomorph
+  bodyPart: Chest
+  markingCategory: Tracheas
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/tracheas.rsi
+    state: neomorph_tubes
+
+- type: marking
+  id: HumanoidXenoTracheasCarrier
+  bodyPart: Chest
+  markingCategory: Tracheas
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/long_tracheas.rsi
+    state: carrier_tubes
+
 # Legs
 
 - type: marking
@@ -249,6 +421,15 @@
   sprites:
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/legs.rsi
     state: predalien_legs
+
+- type: marking
+  id: HumanoidXenoLegsMuscles
+  bodyPart: LLeg
+  markingCategory: Legs
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/legs.rsi
+    state: muscles_legs
 
 # Arms
 
@@ -269,3 +450,12 @@
   sprites:
   - sprite: _Arcane/Mobs/Customization/HumanoidXeno/arms.rsi
     state: ravager_arms
+
+- type: marking
+  id: HumanoidXenoArmsMuscles
+  bodyPart: LArm
+  markingCategory: Arms
+  speciesRestriction: [HumanoidXeno]
+  sprites:
+  - sprite: _Arcane/Mobs/Customization/HumanoidXeno/arms.rsi
+    state: muscles_arms

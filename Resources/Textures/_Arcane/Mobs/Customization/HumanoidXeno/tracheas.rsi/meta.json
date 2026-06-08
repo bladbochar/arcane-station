@@ -22,6 +22,18 @@
         {
             "name": "ravager_tubes",
             "directions": 4
+        },
+        {
+            "name": "boiler_tubes",
+            "directions": 4
+        },
+        {
+            "name": "crusher_tubes",
+            "directions": 4
+        },
+        {
+            "name": "neomorph_tubes",
+            "directions": 4
         }
     ]
 }
