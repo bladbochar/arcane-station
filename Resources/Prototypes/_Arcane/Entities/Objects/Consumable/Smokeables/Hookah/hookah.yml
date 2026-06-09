@@ -1,0 +1,22 @@
+- type: entity
+  parent: BaseItem
+  id: Hookah
+  name: hookah
+  description: "It is an hookah. Storage for hookah pipe. Now it's almost safe, just add some water."
+  components:
+  - type: Sprite
+    sprite: _Arcane/Objects/Consumable/Smokeables/hookah.rsi
+    state: icon
+  - type: Item
+    size: Huge
+  - type: ItemSlots
+    slots:
+      hookahp:
+        ejectOnInteract: false
+        whitelist:
+          tags:
+          - Hookahpipe
+  - type: ContainerFill
+    containers:
+      hookahp:
+      - hookah-pipe
