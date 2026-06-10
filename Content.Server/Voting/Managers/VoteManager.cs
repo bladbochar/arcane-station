@@ -127,16 +127,7 @@ namespace Content.Server.Voting.Managers
                 // Send current votes to newly connected players.
                 foreach (var voteReg in _votes.Values)
                 {
-                    // Arcane-start
-                    try
-                    {
-                        SendSingleUpdate(voteReg, e.Session);
-                    }
-                    catch (NotImplementedException)
-                    {
-                        // Just ignore this broken shit
-                    }
-                    // Arcane-end
+                    SendSingleUpdate(voteReg, e.Session);
                 }
 
                 DirtyCanCallVote(e.Session);
