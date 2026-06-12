@@ -36,7 +36,7 @@ public sealed class ArtCVars
     /// Default volume setting of TTS sound
     /// </summary>
     public static readonly CVarDef<float> TTSVolume =
-        CVarDef.Create("tts.volume", 0f, CVar.CLIENTONLY | CVar.ARCHIVE);
+        CVarDef.Create("tts.volume", 0.5f, CVar.CLIENTONLY | CVar.ARCHIVE); // Arcane
 
     /// <summary>
     /// Count of in-memory cached tts voice lines.
