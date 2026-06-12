@@ -216,7 +216,7 @@
     Weh:
       collection: Weh
     Growl:
-      collection: VulpkaninGrowls # Arcane-Edit
+      collection: FemaleVulpkaninGrowls # Arcane-Edit
     Snarl:
       collection: VulpkaninSnarls
     Bark:
@@ -238,7 +238,7 @@
     Surprised: # Goob
       path: /Audio/_Goobstation/Voice/surprised.ogg
     Hiss: # Arcane
-      path: /Audio/Animals/snake_hiss.ogg 
+      path: /Audio/Animals/snake_hiss.ogg
 
 - type: emoteSounds
   id: MaleVulpkanin
@@ -290,7 +290,7 @@
     Surprised: # Goob
       path: /Audio/_Goobstation/Voice/surprised.ogg
     Hiss: # Arcane
-      path: /Audio/Animals/snake_hiss.ogg 
+      path: /Audio/Animals/snake_hiss.ogg
 
 
 - type: emoteSounds

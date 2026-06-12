@@ -7,7 +7,7 @@
     - /Audio/_DV/Voice/Vulpkanin/dog_growl4.ogg
     - /Audio/_DV/Voice/Vulpkanin/dog_growl5.ogg
     - /Audio/_DV/Voice/Vulpkanin/dog_growl6.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/female_fox_growl.ogg.
+    - /Audio/_Arcane/Voice/Vulpkanin/female_fox_growl.ogg
 
 - type: soundCollection
   id: FemaleVulpkaninHowls
@@ -23,8 +23,8 @@
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream3.ogg
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream4.ogg
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream5.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/female_fox_scream1.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/female_fox_scream2.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/female_fox_scream1.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/female_fox_scream2.ogg
 
 
 - type: soundCollection
@@ -36,13 +36,13 @@
     - /Audio/_DV/Voice/Vulpkanin/dog_growl4.ogg
     - /Audio/_DV/Voice/Vulpkanin/dog_growl5.ogg
     - /Audio/_DV/Voice/Vulpkanin/dog_growl6.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/male_wolf_growl.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/male_wolf_growl.ogg
 
 - type: soundCollection
   id: MaleVulpkaninHowls
   files:
     - /Audio/_DV/Voice/Vulpkanin/howl.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/male_wolf_howl.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/male_wolf_howl.ogg
 
 - type: soundCollection
   id: MaleVulpkaninScreams
@@ -52,17 +52,17 @@
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream3.ogg
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream4.ogg
     - /Audio/_EinsteinEngines/Voice/Vulpkanin/vulpscream5.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/male_fox_scream1.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/male_fox_scream2.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/male_fox_scream1.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/male_fox_scream2.ogg
 
 - type: soundCollection
   id: VulpkaninCry
   files:
-    - /Audio/_Arcane/Voice/Vulpcanin/fox_cry1.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/fox_cry2.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/fox_cry1.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/fox_cry2.ogg
 
 - type: soundCollection
   id: VulpkaninLaugh
   files:
-    - /Audio/_Arcane/Voice/Vulpcanin/fox_laugh1.ogg
-    - /Audio/_Arcane/Voice/Vulpcanin/fox_laugh2.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/fox_laugh1.ogg
+    - /Audio/_Arcane/Voice/Vulpkanin/fox_laugh2.ogg
