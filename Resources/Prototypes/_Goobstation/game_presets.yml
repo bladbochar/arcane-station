@@ -163,7 +163,7 @@
   # minPlayers: 5 Arcane
   rules:
     # - CalmDynamic Arcane
-    - SubGamemodesRule
+    - SubGamemodesCalmRule # Arcane
     - BasicStationEventScheduler # Arcane
     - RareIonStormScheduler
     - SpaceTrafficControlFriendlyEventScheduler
