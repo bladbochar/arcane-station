@@ -266,6 +266,14 @@ public sealed partial class GoobCVars
     public static readonly CVarDef<string> RMCDiscordAccountLinkingMessageLink =
         CVarDef.Create("rmc.discord_account_linking_message_link", "", CVar.REPLICATED | CVar.SERVER);
 
+    // arcane discord link start
+    public static readonly CVarDef<bool> RMCDiscordAccountLinkRequired =
+        CVarDef.Create("rmc.discord_account_link_required", false, CVar.REPLICATED | CVar.SERVER);
+
+    public static readonly CVarDef<bool> RMCDiscordAccountPlayerRoleRequired =
+        CVarDef.Create("rmc.discord_account_player_role_required", false, CVar.REPLICATED | CVar.SERVER);
+    // arcane discord link end
+
     #endregion
 
     public static readonly CVarDef<string> PatronSupportLastShown =

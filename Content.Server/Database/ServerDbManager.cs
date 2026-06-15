@@ -433,6 +433,12 @@ namespace Content.Server.Database
 
         Task<bool> HasLinkedAccount(Guid player, CancellationToken cancel);
 
+        // arcane discord link start
+        Task<(bool Linked, bool HasPlayerRole)> GetLinkedAccountStatus(Guid player, CancellationToken cancel);
+
+        Task<bool> UnlinkDiscordAccount(Guid player, CancellationToken cancel);
+        // arcane discord link end
+
         Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel);
 
         Task<List<RMCPatron>> GetAllPatrons();
@@ -1224,6 +1230,20 @@ namespace Content.Server.Database
             DbReadOpsMetric.Inc();
             return RunDbCommand(() => _db.HasLinkedAccount(player, cancel));
         }
+
+        // arcane discord link start
+        public Task<(bool Linked, bool HasPlayerRole)> GetLinkedAccountStatus(Guid player, CancellationToken cancel)
+        {
+            DbReadOpsMetric.Inc();
+            return RunDbCommand(() => _db.GetLinkedAccountStatus(player, cancel));
+        }
+
+        public Task<bool> UnlinkDiscordAccount(Guid player, CancellationToken cancel)
+        {
+            DbWriteOpsMetric.Inc();
+            return RunDbCommand(() => _db.UnlinkDiscordAccount(player, cancel));
+        }
+        // arcane discord link end
 
         public Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel)
         {

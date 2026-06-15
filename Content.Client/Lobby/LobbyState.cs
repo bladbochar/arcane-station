@@ -92,6 +92,9 @@ using Content.Client.Message;
 using Content.Client.Playtime;
 using Content.Client.UserInterface.Systems.Chat;
 using Content.Client.Voting;
+// arcane discord link start
+using Content.Goobstation.Common.CCVar;
+// arcane discord link end
 using Content.Goobstation.Common.ServerCurrency;
 using Content.Shared.CCVar;
 using Robust.Client;
@@ -127,6 +130,9 @@ namespace Content.Client.Lobby
 
         protected override Type? LinkedScreenType { get; } = typeof(LobbyGui);
         public LobbyGui? Lobby;
+        // arcane discord link start
+        private bool _discordUnlinkRequested;
+        // arcane discord link end
 
         protected override void Startup()
         {
@@ -164,6 +170,9 @@ namespace Content.Client.Lobby
             Lobby.CharacterPreview.CharacterSetupButton.OnPressed += OnSetupPressed;
             Lobby.ManifestButton.OnPressed += OnManifestPressed; // Orion
             Lobby.CharacterPreview.PatronPerks.OnPressed += OnPatronPerksPressed;
+            // arcane discord link start
+            Lobby.DiscordLinkButton.OnPressed += OnDiscordLinkPressed;
+            // arcane discord link end
             Lobby.ReadyButton.OnPressed += OnReadyPressed;
             Lobby.ReadyButton.OnToggled += OnReadyToggled;
 
@@ -189,6 +198,9 @@ namespace Content.Client.Lobby
             Lobby!.CharacterPreview.CharacterSetupButton.OnPressed -= OnSetupPressed;
             Lobby!.ManifestButton.OnPressed -= OnManifestPressed; // Orion
             Lobby.CharacterPreview.PatronPerks.OnPressed -= OnPatronPerksPressed;
+            // arcane discord link start
+            Lobby.DiscordLinkButton.OnPressed -= OnDiscordLinkPressed;
+            // arcane discord link end
             Lobby!.ReadyButton.OnPressed -= OnReadyPressed;
             Lobby!.ReadyButton.OnToggled -= OnReadyToggled;
 
@@ -211,6 +223,17 @@ namespace Content.Client.Lobby
         {
             _userInterfaceManager.GetUIController<LinkAccountUIController>().TogglePatronPerksWindow();
         }
+
+        // arcane discord link start
+        private void OnDiscordLinkPressed(BaseButton.ButtonEventArgs obj)
+        {
+            if (!_linkAccount.Linked)
+                return;
+
+            _discordUnlinkRequested = true;
+            _userInterfaceManager.GetUIController<LinkAccountUIController>().RequestUnlink();
+        }
+        // arcane discord link end
 
         private void OnReadyPressed(BaseButton.ButtonEventArgs args)
         {
@@ -288,6 +311,9 @@ namespace Content.Client.Lobby
         private void LobbyLateJoinStatusUpdated()
         {
             Lobby!.ReadyButton.Disabled = _gameTicker.DisallowedLateJoin;
+            // arcane discord link start
+            ApplyDiscordLinkGate();
+            // arcane discord link end
         }
 
         private void UpdateLobbyUi()
@@ -323,6 +349,9 @@ namespace Content.Client.Lobby
             }
 
             UpdatePlayerBalance(); // Goobstation - Goob Coin
+            // arcane discord link start
+            ApplyDiscordLinkGate();
+            // arcane discord link end
 
             var minutesToday = _playtimeTracking.PlaytimeMinutesToday;
             if (minutesToday > 60)
@@ -418,5 +447,35 @@ namespace Content.Client.Lobby
         {
             Lobby!.Balance.Text = _serverCur.Stringify(_serverCur.GetBalance());
         }
+
+        // arcane discord link start
+        private void ApplyDiscordLinkGate()
+        {
+            if (Lobby == null)
+                return;
+
+            var linkRequired = _cfg.GetCVar(GoobCVars.RMCDiscordAccountLinkRequired);
+            var roleRequired = _cfg.GetCVar(GoobCVars.RMCDiscordAccountPlayerRoleRequired);
+            var linked = _linkAccount.Linked;
+            var hasRequiredRole = !roleRequired || _linkAccount.HasPlayerRole;
+            var canPlay = !linkRequired || linked && hasRequiredRole;
+
+            Lobby.DiscordLinkButton.Visible = linked;
+            Lobby.DiscordLinkButton.Disabled = _discordUnlinkRequested;
+            Lobby.DiscordLinkButton.Text = Loc.GetString("rmc-ui-unlink-discord-account");
+
+            Lobby.DiscordLinkStatus.Visible = linkRequired && !canPlay;
+            if (linkRequired && !linked)
+                Lobby.DiscordLinkStatus.SetMarkup(Loc.GetString("rmc-ui-discord-link-required"));
+            else if (linkRequired && !hasRequiredRole)
+                Lobby.DiscordLinkStatus.SetMarkup(Loc.GetString("rmc-ui-discord-player-role-required"));
+
+            if (!canPlay)
+            {
+                Lobby.ReadyButton.Disabled = true;
+                Lobby.ObserveButton.Disabled = true;
+            }
+        }
+        // arcane discord link end
     }
 }
