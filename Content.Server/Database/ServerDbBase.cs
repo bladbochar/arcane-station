@@ -2034,6 +2034,41 @@ INSERT INTO player_round (players_id, rounds_id) VALUES ({players[player]}, {id}
 
         }
 
+        // arcane discord link start
+        public async Task<(bool Linked, bool HasPlayerRole)> GetLinkedAccountStatus(Guid player, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+            var linked = await db.DbContext.RMCLinkedAccounts
+                .Include(l => l.Discord)
+                .FirstOrDefaultAsync(l => l.PlayerId == player, cancel);
+
+            return linked == null
+                ? (false, false)
+                : (true, linked.Discord.HasPlayerRole);
+        }
+
+        public async Task<bool> UnlinkDiscordAccount(Guid player, CancellationToken cancel)
+        {
+            await using var db = await GetDb(cancel);
+            var linked = await db.DbContext.RMCLinkedAccounts
+                .FirstOrDefaultAsync(l => l.PlayerId == player, cancel);
+
+            if (linked == null)
+                return false;
+
+            db.DbContext.RMCLinkedAccounts.Remove(linked);
+
+            var linkingCode = await db.DbContext.RMCLinkingCodes
+                .FirstOrDefaultAsync(l => l.PlayerId == player, cancel);
+
+            if (linkingCode != null)
+                db.DbContext.RMCLinkingCodes.Remove(linkingCode);
+
+            await db.DbContext.SaveChangesAsync(cancel);
+            return true;
+        }
+        // arcane discord link end
+
         public async Task<RMCPatron?> GetPatron(Guid player, CancellationToken cancel)
         {
             await using var db = await GetDb(cancel);
