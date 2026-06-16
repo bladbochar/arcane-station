@@ -22,9 +22,11 @@
 
 using Content.Goobstation.Common.Effects;
 using Content.Shared.Body.Systems;
+using Content.Shared.Chat;
 using Content.Shared.DoAfter;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
+using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Prototypes;
@@ -38,6 +40,7 @@ public sealed class SharedInfinityDormSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SparksSystem _sparks = default!;
+    [Dependency] private readonly SharedPopupSystem _popup = default!;
 
     private static readonly ProtoId<TagPrototype> InfiniteDormItemTag = "InfiniteDormItem";
     private static readonly ProtoId<TagPrototype> InfiniteDormItemBlockTag = "InfiniteDormItemBlock";
@@ -74,7 +77,10 @@ public sealed class SharedInfinityDormSystem : EntitySystem
             return;
 
         if (HasInfiniteDormItem(args.User))
+        {
+            _popup.PopupClient(Loc.GetString("infinity-dorm-warning-blocked-items"), args.User, PopupType.SmallCaution);
             return;
+        }
 
         RemoveInfiniteDormTags(args.User);
         RemComp<InfinityDormVisitorComponent>(args.User);
