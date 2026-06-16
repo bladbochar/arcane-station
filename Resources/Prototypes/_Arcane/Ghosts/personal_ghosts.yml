@@ -11,7 +11,7 @@
   id: MobObserverVecortys
   parent: AdminObserver
   categories: [ HideSpawnMenu ]
-  description: Да, да. Тише, тише.
+  description: Тише, тише.
   components:
   - type: Sprite
     sprite: _Arcane/Ghosts/ckey/Vecortys.rsi
