@@ -1,0 +1,7 @@
+- type: infinityDorm
+  id: Aurora
+  title: Аврора
+  author: Vecortys
+  description: Просторный зимний номер с уютным местом у камина.
+  category: Cold
+  gridPath: /Maps/_Arcane/InfinityDorms/aurora.yml

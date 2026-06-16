@@ -1,0 +1,9 @@
+- type: infinityDormCategory
+  id: Warm
+  color: "#978d33aa"
+  name: Тёплое
+
+- type: infinityDormCategory
+  id: Cold
+  color: "#557e7eaa"
+  name: Холодное

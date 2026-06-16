@@ -610,7 +610,7 @@ public sealed partial class GoobCVars
     /// Whether or not to spawn space whales if the entity is too far away from the station
     /// </summary>
     public static readonly CVarDef<bool> SpaceWhaleSpawn =
-        CVarDef.Create("misc.space_whale_spawn", true, CVar.SERVER);
+        CVarDef.Create("misc.space_whale_spawn", false, CVar.SERVER); // Arcane - disable by default
 
     /// <summary>
     /// The distance to spawn a space whale from the station

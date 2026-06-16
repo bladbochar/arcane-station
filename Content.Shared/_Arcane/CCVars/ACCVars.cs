@@ -22,4 +22,10 @@ public sealed partial class ACCVars
     /// </summary>
     public static readonly CVarDef<int> NpcSleepRange =
         CVarDef.Create("npc.sleep_range", 30, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Максимальное количество infinity dorms, которые может создать один пользователь.
+    /// </summary>
+    public static readonly CVarDef<int> MaxUserInfinityDorms =
+        CVarDef.Create("infinity_dorms.max_per_user", 2, CVar.SERVER | CVar.REPLICATED);
 }

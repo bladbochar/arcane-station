@@ -41,4 +41,10 @@
   id: FlowerPinkTulip
 
 - type: Tag
+  id: InfiniteDormItem
+
+- type: Tag
+  id: InfiniteDormItemBlock
+ 
+- type: Tag
   id: Hookahpipe
