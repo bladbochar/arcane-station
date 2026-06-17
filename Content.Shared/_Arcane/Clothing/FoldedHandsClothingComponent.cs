@@ -1,4 +1,4 @@
-namespace Content.Server._Arcane.Clothing;
+﻿namespace Content.Shared._Arcane.Clothing;
 
 /// <summary>
 /// When this clothing item is folded while worn, blocks the wearer's hands with virtual items.

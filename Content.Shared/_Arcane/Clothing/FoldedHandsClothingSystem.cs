@@ -1,4 +1,4 @@
-using Content.Shared.Clothing;
+﻿using Content.Shared.Clothing;
 using Content.Shared.Clothing.Components;
 using Content.Shared.Foldable;
 using Content.Shared.Hands.EntitySystems;
@@ -6,7 +6,7 @@ using Content.Shared.Interaction.Components;
 using Content.Shared.Inventory.VirtualItem;
 using Robust.Shared.Containers;
 
-namespace Content.Server._Arcane.Clothing;
+namespace Content.Shared._Arcane.Clothing;
 
 public sealed class FoldedHandsClothingSystem : EntitySystem
 {
@@ -48,10 +48,12 @@ public sealed class FoldedHandsClothingSystem : EntitySystem
 
     private void BlockHands(Entity<FoldedHandsClothingComponent> ent, EntityUid wearer)
     {
-        foreach (var hand in _hands.EnumerateHands(wearer))
+        // Snapshot the hand list before spawning virtual items to avoid mutating
+        // the hands collection while iterating it.
+        var handCount = _hands.EnumerateHands(wearer).Count();
+        for (var i = 0; i < handCount; i++)
         {
-            _hands.TryDrop(wearer, hand);
-            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, wearer, out var vItem))
+            if (_virtualItem.TrySpawnVirtualItemInHand(ent.Owner, wearer, out var vItem, dropOthers: true))
                 EnsureComp<UnremoveableComponent>(vItem.Value);
         }
     }
@@ -59,11 +61,13 @@ public sealed class FoldedHandsClothingSystem : EntitySystem
     private bool TryGetWearer(Entity<FoldedHandsClothingComponent> ent, out EntityUid wearer)
     {
         wearer = default;
-        // InSlot is non-null only when the item is in an inventory clothing slot, not a backpack or pocket
+
         if (!TryComp<ClothingComponent>(ent, out var clothing) || clothing.InSlot == null)
             return false;
+
         if (!_container.TryGetContainingContainer(ent.Owner, out var cont))
             return false;
+
         wearer = cont.Owner;
         return true;
     }
