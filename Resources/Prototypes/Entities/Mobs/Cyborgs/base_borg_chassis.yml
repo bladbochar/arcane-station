@@ -261,6 +261,7 @@
   - type: ActionGrant
     actions:
     - ActionViewLaws
+    - ActionToggleSiliconResting # Arcane
   - type: EmagSiliconLaw
     stunTime: 5
   - type: SiliconLawProvider
@@ -294,6 +295,7 @@
     doAfterDelay: 10
     # allowSelfRepair: false # Goobstation
   - type: BorgChassis
+  - type: SiliconStanding # Arcane
   - type: LockingWhitelist
     blacklist:
       components:

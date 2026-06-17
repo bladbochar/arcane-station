@@ -34,4 +34,10 @@ public sealed partial class BorgSubtypePrototype : IPrototype
     /// </summary>
     [DataField]
     public required ProtoId<BorgTypePrototype> ParentBorgType = "generic";
+
+    /// <summary>
+    /// RSI state name to use when this borg is resting. Leave null if the subtype has no rest sprite.
+    /// </summary>
+    [DataField]
+    public string? RestBodyState; // Arcane
 }

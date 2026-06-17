@@ -8,6 +8,7 @@
 //
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._Arcane.SiliconStanding; // Arcane
 using Content.Shared.Movement.Components;
 using Content.Shared.Silicons.Borgs;
 using Content.Shared.Silicons.Borgs.Components;
@@ -84,6 +85,19 @@ public sealed class BorgSwitchableTypeSystem : SharedBorgSwitchableTypeSystem
                 _appearance.QueueUpdate(entity, appearance);
             }
         }
+
+        // Arcane-Edit-Start
+        if (subtypePrototype.RestBodyState is { } restBodyState)
+        {
+            var visuals = EnsureComp<SiliconRestingVisualsComponent>(entity);
+            visuals.NormalBodyState = prototype.SpriteBodyState;
+            visuals.RestBodyState = restBodyState;
+        }
+        else
+        {
+            RemComp<SiliconRestingVisualsComponent>(entity);
+        }
+        // Arcane-Edit-End
 
         if (prototype.SpriteBodyMovementState is { } movementState)
         {

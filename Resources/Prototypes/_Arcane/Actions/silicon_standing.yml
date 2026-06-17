@@ -1,0 +1,14 @@
+﻿- type: entity
+  parent: BaseAction
+  id: ActionToggleSiliconResting
+  categories: [ HideSpawnMenu ]
+  name: action-toggle-silicon-resting-name
+  description: action-toggle-silicon-resting-desc
+  components:
+  - type: Action
+    itemIconStyle: NoItem
+    icon:
+      sprite: Interface/Actions/actions_borg.rsi
+      state: no-action
+  - type: InstantAction
+    event: !type:ToggleSiliconRestingEvent

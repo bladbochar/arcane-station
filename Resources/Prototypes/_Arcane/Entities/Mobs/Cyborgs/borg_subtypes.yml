@@ -1,0 +1,198 @@
+﻿# Engineering subtypes
+
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_mekaengi
+  spritePath: _Arcane/Mobs/Silicon/Engineering/mekaengi.rsi
+  restBodyState: engineer-rest
+  dummyPrototype: BorgChassisEngineerMekaengi
+
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_k4tengi
+  spritePath: _Arcane/Mobs/Silicon/Engineering/k4tengi.rsi
+  restBodyState: engineer-rest
+  dummyPrototype: BorgChassisEngineerK4t
+
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_k4tengi_alt1
+  spritePath: _Arcane/Mobs/Silicon/Engineering/k4tengi_alt1.rsi
+  restBodyState: engineer-rest
+  dummyPrototype: BorgChassisEngineerK4tAlt
+
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_fmekaengi
+  spritePath: _Arcane/Mobs/Silicon/Engineering/fmekaengi.rsi
+  restBodyState: engineer-rest
+  dummyPrototype: BorgChassisEngineerFMeka
+
+- type: borgSubtype
+  parentBorgType: engineering
+  id: engineer_mmekaengi
+  spritePath: _Arcane/Mobs/Silicon/Engineering/mmekaengi.rsi
+  restBodyState: engineer-rest
+  dummyPrototype: BorgChassisEngineerMMeka
+
+# Janitor subtypes
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_mekajani
+  spritePath: _Arcane/Mobs/Silicon/Janitor/mekajani.rsi
+  restBodyState: janitor-rest
+  dummyPrototype: BorgChassisJanitorMeka
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_k4tjani
+  spritePath: _Arcane/Mobs/Silicon/Janitor/k4tjani.rsi
+  restBodyState: janitor-rest
+  dummyPrototype: BorgChassisJanitorK4t
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_k4tjani_alt1
+  spritePath: _Arcane/Mobs/Silicon/Janitor/k4tjani_alt1.rsi
+  restBodyState: janitor-rest
+  dummyPrototype: BorgChassisJanitorK4tAlt
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_fmekajani
+  spritePath: _Arcane/Mobs/Silicon/Janitor/fmekajani.rsi
+  restBodyState: janitor-rest
+  dummyPrototype: BorgChassisJanitorFMeka
+
+- type: borgSubtype
+  parentBorgType: janitor
+  id: janitor_mmekajani
+  spritePath: _Arcane/Mobs/Silicon/Janitor/mmekajani.rsi
+  restBodyState: janitor-rest
+  dummyPrototype: BorgChassisJanitorMMeka
+
+# Medical subtypes
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_mekamed
+  spritePath: _Arcane/Mobs/Silicon/Medical/mekamed.rsi
+  restBodyState: medical-rest
+  dummyPrototype: BorgChassisMedicalMeka
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_k4tmed
+  spritePath: _Arcane/Mobs/Silicon/Medical/k4tmed.rsi
+  restBodyState: medical-rest
+  dummyPrototype: BorgChassisMedicalK4t
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_k4tmed_alt1
+  spritePath: _Arcane/Mobs/Silicon/Medical/k4tmed_alt1.rsi
+  restBodyState: medical-rest
+  dummyPrototype: BorgChassisMedicalK4tAlt
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_fmekamed
+  spritePath: _Arcane/Mobs/Silicon/Medical/fmekamed.rsi
+  restBodyState: medical-rest
+  dummyPrototype: BorgChassisMedicalFMeka
+
+- type: borgSubtype
+  parentBorgType: medical
+  id: medical_mmekamed
+  spritePath: _Arcane/Mobs/Silicon/Medical/mmekamed.rsi
+  restBodyState: medical-rest
+  dummyPrototype: BorgChassisMedicalMMeka
+
+# Mining subtypes
+
+- type: borgSubtype
+  parentBorgType: mining
+  id: mining_mekamine
+  spritePath: _Arcane/Mobs/Silicon/Mining/mekamine.rsi
+  restBodyState: miner-rest
+  dummyPrototype: BorgChassisMiningMeka
+
+- type: borgSubtype
+  parentBorgType: mining
+  id: mining_k4tmine
+  spritePath: _Arcane/Mobs/Silicon/Mining/k4tmine.rsi
+  restBodyState: miner-rest
+  dummyPrototype: BorgChassisMiningK4t
+
+- type: borgSubtype
+  parentBorgType: mining
+  id: mining_k4tmine_alt1
+  spritePath: _Arcane/Mobs/Silicon/Mining/k4tmine_alt1.rsi
+  restBodyState: miner-rest
+  dummyPrototype: BorgChassisMiningK4tAlt
+
+- type: borgSubtype
+  parentBorgType: mining
+  id: mining_fmekamine
+  spritePath: _Arcane/Mobs/Silicon/Mining/fmekamine.rsi
+  restBodyState: miner-rest
+  dummyPrototype: BorgChassisMiningFMeka
+
+- type: borgSubtype
+  parentBorgType: mining
+  id: mining_mmekamine
+  spritePath: _Arcane/Mobs/Silicon/Mining/mmekamine.rsi
+  restBodyState: miner-rest
+  dummyPrototype: BorgChassisMiningMMeka
+
+# Service subtypes
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_mekaserve
+  spritePath: _Arcane/Mobs/Silicon/Service/mekaserve.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceMeka
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_mekaserve_alt
+  spritePath: _Arcane/Mobs/Silicon/Service/mekaserve_alt.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceMekaAlt
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_k4tserve
+  spritePath: _Arcane/Mobs/Silicon/Service/k4tserve.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceK4t
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_k4tserve_alt1
+  spritePath: _Arcane/Mobs/Silicon/Service/k4tserve_alt1.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceK4tAlt1
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_k4tserve_alt2
+  spritePath: _Arcane/Mobs/Silicon/Service/k4tserve_alt2.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceK4tAlt2
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_fmekaserv
+  spritePath: _Arcane/Mobs/Silicon/Service/fmekaserv.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceFMeka
+
+- type: borgSubtype
+  parentBorgType: service
+  id: service_mmekaserv
+  spritePath: _Arcane/Mobs/Silicon/Service/mmekaserv.rsi
+  restBodyState: service-rest
+  dummyPrototype: BorgChassisServiceMMeka
