@@ -6,6 +6,12 @@ namespace Content.Shared._Arcane.CCVars;
 public sealed partial class ACCVars
 {
     /// <summary>
+    /// Включены ли автоматические голосования в конце раунда.
+    /// </summary>
+    public static readonly CVarDef<bool> AutoVotingEnabled =
+        CVarDef.Create("vote.auto_voting_enabled", false, CVar.SERVERONLY | CVar.ARCHIVE);
+
+    /// <summary>
     /// Должен ли клиент использовать ТТС вместо барков.
     /// </summary>
     public static readonly CVarDef<bool> UseTTS =
@@ -16,4 +22,10 @@ public sealed partial class ACCVars
     /// </summary>
     public static readonly CVarDef<int> NpcSleepRange =
         CVarDef.Create("npc.sleep_range", 30, CVar.SERVERONLY);
+
+    /// <summary>
+    /// Максимальное количество infinity dorms, которые может создать один пользователь.
+    /// </summary>
+    public static readonly CVarDef<int> MaxUserInfinityDorms =
+        CVarDef.Create("infinity_dorms.max_per_user", 2, CVar.SERVER | CVar.REPLICATED);
 }

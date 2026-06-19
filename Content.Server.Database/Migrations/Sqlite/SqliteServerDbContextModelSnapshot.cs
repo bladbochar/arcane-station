@@ -1205,6 +1205,14 @@ namespace Content.Server.Database.Migrations.Sqlite
                         .HasColumnType("INTEGER")
                         .HasColumnName("rmc_discord_accounts_id");
 
+                    b.Property<bool>("HasPlayerRole")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("has_player_role");
+
+                    b.Property<DateTime?>("PlayerRoleUpdatedAt")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("player_role_updated_at");
+
                     b.HasKey("Id")
                         .HasName("PK_rmc_discord_accounts");
 

@@ -168,7 +168,7 @@
       - Bucket
   - type: PhysicalComposition #Goobstation - Recycle update
     materialComposition:
-      Plastic: 20 # Orion-Edit: 50 > 20
+      Plastic: 20 # Orion-Edit: 10 > 20
   - type: DnaSubstanceTrace
   - type: Armor #Goobstation
     coverage:
