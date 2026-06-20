@@ -24,11 +24,14 @@ using Content.Goobstation.Common.Effects;
 using Content.Shared.Body.Systems;
 using Content.Shared.Chat;
 using Content.Shared.DoAfter;
+using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
 using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
+using Robust.Shared.Map.Components;
+using Robust.Shared.Network;
 using Robust.Shared.Prototypes;
 
 namespace Content.Shared._Arcane.InfinityDorm;
@@ -40,7 +43,8 @@ public sealed class SharedInfinityDormSystem : EntitySystem
     [Dependency] private readonly TagSystem _tag = default!;
     [Dependency] private readonly SharedBodySystem _body = default!;
     [Dependency] private readonly SparksSystem _sparks = default!;
-    [Dependency] private readonly SharedPopupSystem _popup = default!;
+    [Dependency] private readonly SharedChatSystem _chat = default!;
+    [Dependency] private readonly INetManager _net = default!;
 
     private static readonly ProtoId<TagPrototype> InfiniteDormItemTag = "InfiniteDormItem";
     private static readonly ProtoId<TagPrototype> InfiniteDormItemBlockTag = "InfiniteDormItemBlock";
@@ -53,7 +57,7 @@ public sealed class SharedInfinityDormSystem : EntitySystem
         SubscribeLocalEvent<InfinityDormExitComponent, InfinityDormExitDoAfterEvent>(OnExitDoAfter);
         SubscribeLocalEvent<InfinityDormVisitorComponent, ComponentInit>(OnVisitorInit);
         SubscribeLocalEvent<InfinityDormVisitorComponent, DidEquipHandEvent>(OnDidEquipHandEvent);
-        SubscribeLocalEvent<InfinityDormVisitorComponent, EntParentChangedMessage>(OnVisitorParentChanged);
+        SubscribeLocalEvent<EntParentChangedMessage>(OnVisitorParentChanged);
     }
 
     private void OnExitInteract(EntityUid uid, InfinityDormExitComponent component, InteractHandEvent args)
@@ -78,7 +82,7 @@ public sealed class SharedInfinityDormSystem : EntitySystem
 
         if (HasInfiniteDormItem(args.User))
         {
-            _popup.PopupClient(Loc.GetString("infinity-dorm-warning-blocked-items"), args.User, PopupType.SmallCaution);
+            _chat.TrySendInGameICMessage(uid, Loc.GetString("infinity-dorm-warning-blocked-items"), InGameICChatType.Speak, true);
             return;
         }
 
@@ -109,15 +113,25 @@ public sealed class SharedInfinityDormSystem : EntitySystem
         args.Handled = true;
     }
 
-    private void OnVisitorParentChanged(EntityUid uid, InfinityDormVisitorComponent component, EntParentChangedMessage args)
+    private void OnVisitorParentChanged(ref EntParentChangedMessage args)
     {
-        if (HasComp<InfinityDormComponent>(_transform.GetParentUid(uid)))
+        if (_net.IsClient)
             return;
 
-        if (!HasInfiniteDormItem(uid))
+        if (HasComp<GhostComponent>(args.Entity))
             return;
 
-        _body.GibBody(uid);
+        if (!HasComp<MapGridComponent>(_transform.GetParentUid(args.Entity)))
+            return;
+
+        var isDorm = HasComp<InfinityDormComponent>(_transform.GetParentUid(args.Entity));
+        if (isDorm && HasComp<InfinityDormVisitorComponent>(args.Entity))
+            return;
+
+        if (!HasInfiniteDormItem(args.Entity) && !isDorm)
+            return;
+
+        _body.GibBody(args.Entity);
     }
 
     private void MarkInitItems(EntityUid user)

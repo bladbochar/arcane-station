@@ -59,7 +59,7 @@ SOFTWARE. -->
                         </Button.StyleBoxOverride>
                     </Button>
 
-                    <!-- Потому что VSeparator не имеет параметра цвета... -->
+                    <!-- Потому что HSeparator не имеет параметра цвета... -->
                     <PanelContainer HorizontalExpand="True" SetHeight="3" Margin="0 10">
                         <PanelContainer.PanelOverride>
                             <gfx:StyleBoxFlat BackgroundColor="#3F6BA6" />
@@ -90,11 +90,22 @@ SOFTWARE. -->
                     </PanelContainer.PanelOverride>
                 </PanelContainer>
 
-                <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
-                    <BoxContainer Name="RoomsContainer"  Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="10">
-                        <!-- Заполняется через код -->
-                    </BoxContainer>
-                </ScrollContainer>
+                <BoxContainer Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True">
+                    <ScrollContainer VScrollEnabled="True" HorizontalExpand="True" VerticalExpand="True">
+                        <BoxContainer Name="RoomsContainer"  Orientation="Vertical" HorizontalExpand="True" VerticalExpand="True" Margin="10">
+                            <!-- Заполняется через код -->
+                        </BoxContainer>
+                    </ScrollContainer>
+
+                    <!-- Потому что HSeparator не имеет параметра цвета... -->
+                    <PanelContainer HorizontalExpand="True" SetHeight="3" VerticalAlignment="Bottom">
+                        <PanelContainer.PanelOverride>
+                            <gfx:StyleBoxFlat BackgroundColor="#3F6BA6" />
+                        </PanelContainer.PanelOverride>
+                    </PanelContainer>
+
+                    <RichTextLabel Text="{Loc veco-corp-label}" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+                </BoxContainer>
             </BoxContainer>
         </PanelContainer>
     </PanelContainer>

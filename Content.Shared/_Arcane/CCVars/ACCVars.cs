@@ -28,4 +28,10 @@ public sealed partial class ACCVars
     /// </summary>
     public static readonly CVarDef<int> MaxUserInfinityDorms =
         CVarDef.Create("infinity_dorms.max_per_user", 2, CVar.SERVER | CVar.REPLICATED);
+
+    /// <summary>
+    /// Должна ли система автоматически добавлять пацифист после конца раунда.
+    /// </summary>
+    public static readonly CVarDef<bool> EndRoundPacification =
+        CVarDef.Create("game.end_round_pacifism", true, CVar.SERVERONLY | CVar.ARCHIVE);
 }

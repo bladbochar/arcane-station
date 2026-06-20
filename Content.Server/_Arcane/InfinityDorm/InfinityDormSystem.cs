@@ -144,8 +144,8 @@ public sealed class InfinityDormSystem : EntitySystem
             var xform = Transform(dormUid);
             var targetCoords = new MapCoordinates(_transform.GetWorldPosition(dormUid), xform.MapID);
 
-            _transform.SetMapCoordinates(uid, targetCoords);
             EnsureComp<InfinityDormVisitorComponent>(uid);
+            _transform.SetMapCoordinates(uid, targetCoords);
             return;
         }
     }

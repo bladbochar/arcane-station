@@ -13,3 +13,5 @@
     layers:
     - state: closed
       map: ["enum.DoorVisualLayers.Base"]
+  - type: Speech
+  - type: Vocal

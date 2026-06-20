@@ -1,9 +1,14 @@
 - type: infinityDormCategory
-  id: Warm
-  color: "#978d33aa"
-  name: Тёплое
+  id: General
+  color: "#8a6e31aa"
+  name: Классика
 
 - type: infinityDormCategory
-  id: Cold
-  color: "#557e7eaa"
-  name: Холодное
+  id: Unusual
+  color: "#7a2d40aa"
+  name: Необычное
+
+- type: infinityDormCategory
+  id: Exotic
+  color: "#3d8349aa"
+  name: Экзотическое

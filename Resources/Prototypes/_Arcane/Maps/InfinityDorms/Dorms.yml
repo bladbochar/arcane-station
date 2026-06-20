@@ -3,5 +3,21 @@
   title: Аврора
   author: Vecortys
   description: Просторный зимний номер с уютным местом у камина.
-  category: Cold
+  category: Unusual
   gridPath: /Maps/_Arcane/InfinityDorms/aurora.yml
+
+- type: infinityDorm
+  id: Narure
+  title: Природа
+  author: seemah
+  description: Приятный отдых на природе.
+  category: General
+  gridPath: /Maps/_Arcane/InfinityDorms/narure.yml
+
+- type: infinityDorm
+  id: Retro
+  title: Ретро
+  author: seemah
+  description: Комната отдыха прямиком из прошлого!
+  category: General
+  gridPath: /Maps/_Arcane/InfinityDorms/retro.yml

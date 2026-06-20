@@ -261,7 +261,8 @@ namespace Content.Shared.Preferences
             HashSet<ProtoId<AntagPrototype>> antagPreferences,
             HashSet<ProtoId<TraitPrototype>> traitPreferences,
             Dictionary<string, RoleLoadout> loadouts,
-            ProtoId<BarkPrototype> barkVoice) // Goob Station - Barks
+            ProtoId<BarkPrototype> barkVoice, // Goob Station - Barks
+            ErpPreference erpPreference) // Arcane
         {
             Name = name;
             FlavorText = flavortext;
@@ -293,6 +294,7 @@ namespace Content.Shared.Preferences
             _traitPreferences = traitPreferences;
             _loadouts = loadouts;
             BarkVoice = barkVoice; // Goob Station - Barks
+            ErpPreference = erpPreference; // Arcane
 
             var hasHighPrority = false;
             foreach (var (key, value) in _jobPriorities)
@@ -340,10 +342,9 @@ namespace Content.Shared.Preferences
                 new HashSet<ProtoId<AntagPrototype>>(other.AntagPreferences),
                 new HashSet<ProtoId<TraitPrototype>>(other.TraitPreferences),
                 new Dictionary<string, RoleLoadout>(other.Loadouts),
-                other.BarkVoice) // Goob Station - Barks
-        {
-            ErpPreference = other.ErpPreference; // Arcane-edit
-        }
+                other.BarkVoice, // Goob Station - Barks
+                other.ErpPreference) // arcane
+        { }
 
         /// <summary>
         ///     Get the default humanoid character profile, using internal constant values.
