@@ -20,18 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System.Numerics;
 using Content.Goobstation.Common.Effects;
 using Content.Server.AlertLevel;
-using Content.Server.Chat.Managers;
 using Content.Server.Chat.Systems;
 using Content.Server.Station.Systems;
 using Content.Shared._Arcane.CCVars;
 using Content.Shared._Arcane.InfinityDorm;
 using Content.Shared.Access.Components;
 using Content.Shared.Access.Systems;
-using Content.Shared.Chat;
-using Microsoft.CodeAnalysis.Elfie.Serialization;
 using Robust.Shared.Configuration;
 using Robust.Shared.EntitySerialization.Systems;
 using Robust.Shared.Map;
@@ -39,7 +35,7 @@ using Robust.Shared.Prototypes;
 
 namespace Content.Server._Arcane.InfinityDorm;
 
-public sealed class InfinityDormSystem : EntitySystem
+public sealed partial class InfinityDormSystem : EntitySystem
 {
     [Dependency] private readonly SharedMapSystem _map = default!;
     [Dependency] private readonly SharedTransformSystem _transform = default!;
@@ -67,11 +63,6 @@ public sealed class InfinityDormSystem : EntitySystem
         Subs.CVar(_cfg, ACCVars.MaxUserInfinityDorms, SetMaxUserDorms, true);
     }
 
-    private void SetMaxUserDorms(int value)
-    {
-        _maxUserDorms = value;
-    }
-
     private void HandleTeleporterMessage(EntityUid uid, InfinityDormTeleporterComponent component, InfinityDormTeleportMessage args)
     {
         var station = _station.GetOwningStation(uid);
@@ -87,8 +78,8 @@ public sealed class InfinityDormSystem : EntitySystem
         _accessReader.LogAccess((uid, accessReader), args.Actor);
 
         _sparks.DoSparks(Transform(args.Actor).Coordinates, 3, 10);
-
         TeleportToDorm(args.Actor, args.Number);
+        _sparks.DoSparks(Transform(args.Actor).Coordinates, 3, 10);
     }
 
     private void HandleDormsAmountRequest(RequestDormsAmountEvent args, EntitySessionEventArgs eventArgs)
@@ -101,53 +92,8 @@ public sealed class InfinityDormSystem : EntitySystem
             if (comp.Creator == eventArgs.SenderSession.AttachedEntity)
                 count++;
         }
+
         RaiseNetworkEvent(new UserDormCountMessage(count), eventArgs.SenderSession);
-    }
-
-    private bool TryCreateDorm(EntityUid teleporter, EntityUid creator, string room, int number)
-    {
-        if (IsDormExists(number))
-            return true;
-
-        if (!CheckUserDormsLimit(creator))
-        {
-            _chat.TrySendInGameICMessage(teleporter, Loc.GetString("infinity-dorm-warning-dorms-limit"), InGameICChatType.Speak, false);
-            return false;
-        }
-
-        if (!_proto.TryIndex<InfinityDormPrototype>(room, out var dormProto))
-            return false;
-
-        var offset = new Vector2(_lastPosition + _step, 0);
-        if (!_loader.TryLoadGrid(_dormsMapId, dormProto.GridPath, out var grid, offset: offset))
-            return false;
-
-        _lastPosition = offset.X;
-
-        var dormComp = EnsureComp<InfinityDormComponent>(grid.Value);
-        dormComp.ConnectedTeleporter = teleporter;
-        dormComp.Number = number;
-        dormComp.Creator = creator;
-
-        return true;
-    }
-
-    private void TeleportToDorm(EntityUid uid, int number)
-    {
-        var query = EntityQueryEnumerator<InfinityDormSpawnMarkerComponent>();
-
-        while (query.MoveNext(out var dormUid, out var _))
-        {
-            if (TryComp<InfinityDormComponent>(_transform.GetParentUid(dormUid), out var dormComp) && dormComp.Number != number)
-                continue;
-
-            var xform = Transform(dormUid);
-            var targetCoords = new MapCoordinates(_transform.GetWorldPosition(dormUid), xform.MapID);
-
-            EnsureComp<InfinityDormVisitorComponent>(uid);
-            _transform.SetMapCoordinates(uid, targetCoords);
-            return;
-        }
     }
 
     private void EnsureDormsMap()
@@ -158,30 +104,9 @@ public sealed class InfinityDormSystem : EntitySystem
         _dormsMapId = Transform(_map.CreateMap()).MapID;
     }
 
-    private bool IsDormExists(int number)
+    private void SetMaxUserDorms(int value)
     {
-        var query = EntityQueryEnumerator<InfinityDormComponent>();
-
-        while (query.MoveNext(out var _, out var comp))
-        {
-            if (comp.Number == number)
-                return true;
-        }
-
-        return false;
+        _maxUserDorms = value;
     }
 
-    private bool CheckUserDormsLimit(EntityUid uid)
-    {
-        var count = 0;
-        var query = EntityQueryEnumerator<InfinityDormComponent>();
-
-        while (query.MoveNext(out var _, out var comp))
-        {
-            if (comp.Creator == uid)
-                count++;
-        }
-
-        return count < _maxUserDorms;
-    }
 }

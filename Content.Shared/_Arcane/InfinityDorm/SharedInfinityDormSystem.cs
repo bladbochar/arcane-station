@@ -27,7 +27,6 @@ using Content.Shared.DoAfter;
 using Content.Shared.Ghost;
 using Content.Shared.Hands;
 using Content.Shared.Interaction;
-using Content.Shared.Popups;
 using Content.Shared.Tag;
 using Robust.Shared.Containers;
 using Robust.Shared.Map.Components;
@@ -93,6 +92,9 @@ public sealed class SharedInfinityDormSystem : EntitySystem
 
         var teleporterTransform = Transform(dormComp.ConnectedTeleporter);
         _transform.SetMapCoordinates(args.User, _transform.GetMapCoordinates(teleporterTransform));
+
+        _sparks.DoSparks(Transform(args.User).Coordinates, 3, 10);
+
     }
 
     private void OnVisitorInit(EntityUid uid, InfinityDormVisitorComponent component, ComponentInit args)
