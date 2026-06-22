@@ -1,5 +1,23 @@
 - type: entity
   parent: VendingMachine
+  id: VendingMachineDressMate
+  name: DressMate
+  description: A vending machine stocked with elegant dresses and feminine clothing.
+  components:
+  - type: VendingMachine
+    pack: DressMateInventory
+    offState: off
+    brokenState: broken
+    normalState: off
+  - type: Sprite
+    sprite: _Arcane/Structures/Machines/VendingMachines/dressmat.rsi
+  - type: PointLight
+    radius: 1.5
+    energy: 1.6
+    color: "#FF69B4"
+    
+- type: entity
+  parent: VendingMachine
   id: VendingMachineLove
   name: LoveMate
   description: A wide selection of fun for you!
