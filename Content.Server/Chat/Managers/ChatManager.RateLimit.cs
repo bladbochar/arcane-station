@@ -67,10 +67,6 @@ internal sealed partial class ChatManager
 
     private void RateLimitPlayerLimited(ICommonSession player)
     {
-        // Arcane-start
-        var damageable = _entityManager.System<DamageableSystem>();
-        damageable.TryChangeDamage(player.AttachedEntity, _rateLimitDamage, true, targetPart: TargetBodyPart.Head); // Arcane
-        // Arcane-end
         DispatchServerMessage(player, Loc.GetString("chat-manager-rate-limited"), suppressLog: true);
     }
 

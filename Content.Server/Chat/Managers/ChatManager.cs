@@ -250,16 +250,6 @@ internal sealed partial class ChatManager : IChatManager
 
     private readonly Dictionary<NetUserId, ChatUser> _players = new();
 
-    // Arcane-start
-    private readonly DamageSpecifier _rateLimitDamage = new()
-    {
-        DamageDict = new Dictionary<string, FixedPoint2>
-        {
-            ["Cellular"] = 20
-        },
-    };
-    // Arcane-end
-
     public void Initialize()
     {
         _netManager.RegisterNetMessage<MsgChatMessage>();

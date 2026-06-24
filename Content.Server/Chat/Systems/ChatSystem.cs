@@ -163,6 +163,9 @@ using Content.Shared._RMC14.CCVar;
 using Content.Shared.Eye.Blinding.Components;
 using Content.Shared.Traits.Assorted;
 using Content.Server._Arcane.Discord;
+using Content.Shared.Damage;
+using Content.Goobstation.Maths.FixedPoint;
+using Content.Shared._Shitmed.Targeting;
 // Goob end
 
 namespace Content.Server.Chat.Systems;
@@ -198,6 +201,17 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
     [Dependency] private readonly EmoteProtectionSystem _emoteProtection = default!; // Orion
     [Dependency] private readonly ChatLogsWebhook _chatLogsWebhook = default!; // Arcane
+    [Dependency] private readonly DamageableSystem _damageable = default!; // Arcane
+
+    // Arcane-start
+    private readonly DamageSpecifier _rateLimitDamage = new()
+    {
+        DamageDict = new Dictionary<string, FixedPoint2>
+        {
+            ["Cellular"] = 12
+        },
+    };
+    // Arcane-end
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -356,7 +370,13 @@ public sealed partial class ChatSystem : SharedChatSystem
             _collectiveMind.UpdateCollectiveMind(source, collective);
 
         if (player != null && _chatManager.HandleRateLimit(player) != RateLimitStatus.Allowed)
+        {
+            // Arcane-start
+            if (desiredType == InGameICChatType.Speak || desiredType == InGameICChatType.Whisper)
+                _damageable.TryChangeDamage(player.AttachedEntity, _rateLimitDamage, true, targetPart: TargetBodyPart.Head);
+            // Arcane-end
             return;
+        }
 
         // Orion-Start
         if (_chatProtection.CheckICMessage(message, source))
