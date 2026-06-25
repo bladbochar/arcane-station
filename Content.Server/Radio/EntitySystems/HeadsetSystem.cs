@@ -261,7 +261,7 @@ public sealed class HeadsetSystem : SharedHeadsetSystem
             // Art-TTS Start
             if (canUnderstand && args.Voice is { } voice)
             {
-                var ev = new TTSRadioPlayEvent(args.OriginalChatMsg, args.OriginalChatMsg.Message, args.Language, voice);
+                var ev = new TTSRadioPlayEvent(Filter.SinglePlayer(actor.PlayerSession), args.OriginalChatMsg.Message, args.Language, voice);
                 RaiseLocalEvent(parent, ev);
             }
             // Art-TTS End

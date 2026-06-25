@@ -23,7 +23,7 @@ public sealed partial class TTSSystem : EntitySystem
     [Dependency] private readonly SharedTransformSystem _xforms = default!;
     [Dependency] private readonly LanguageSystem _language = default!;
 
-    private const int MaxMessageChars = 200;
+    private const int MaxMessageChars = 300; // Arcane
     private bool _isEnabled;
 
 
@@ -36,6 +36,7 @@ public sealed partial class TTSSystem : EntitySystem
         SubscribeLocalEvent<TransformSpeechEvent>(OnTransformSpeech);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(_ => _ttsManager.ResetCache());
         SubscribeLocalEvent<ActorComponent, TTSRadioPlayEvent>(OnTTSRadioPlayEvent);
+        SubscribeLocalEvent<TTSAnnouncePlayEvent>(OnTTSAnnouncePlayEvent);
 
         SubscribeNetworkEvent<RequestPreviewTTSEvent>(OnRequestPreviewTTS);
     }
@@ -73,34 +74,49 @@ public sealed partial class TTSSystem : EntitySystem
         if (!_isEnabled || args.Message.Length > MaxMessageChars)
             return;
 
-        HandleReceiveRadio(uid, args.Message, args.Language, args.Voice);
+        HandleReceiveRadio(Filter.SinglePlayer(comp.PlayerSession), args.Message, args.Voice, "radio_headset", args.Language); // Arcane
     }
 
-    private async void HandleReceiveRadio(EntityUid uid, string message, LanguagePrototype language, string speaker)
+    // Arcane-start
+    private void OnTTSAnnouncePlayEvent(TTSAnnouncePlayEvent args)
     {
-        var recipients = Filter.Empty();
-        var hasRecipients = false;
-
-        foreach (var session in Filter.Pvs(uid).Recipients)
+        string? voice = null;
+        if (TryComp<TTSComponent>(args.Sender, out var ttsComponent)
+            && ttsComponent.VoicePrototype is { } voiceId
+            && _prototypeManager.TryIndex(voiceId, out var voicePrototype))
         {
-            if (!session.AttachedEntity.HasValue)
-                continue;
-
-            EntityManager.TryGetComponent(session.AttachedEntity.Value, out LanguageSpeakerComponent? lang);
-            if (!_language.CanUnderstand(new(session.AttachedEntity.Value, lang), language.ID))
-                continue;
-
-            recipients.AddPlayer(session);
-            hasRecipients = true;
+            voice = voicePrototype.Speaker;
         }
 
-        if (!hasRecipients)
+        Logger.Debug("ANNOUNCE PENIS");
+
+        if (voice != null)
+        {
+            Logger.Debug("ANNOUNCE PENIS VOICE CHECK ASDASDSAD");
+
+            Robust.Shared.Timing.Timer.Spawn(TimeSpan.FromSeconds(6), () => HandleReceiveRadio(args.Recievers, args.Message, voice, "announce"));
+        }
+    }
+
+    private async void HandleReceiveRadio(Filter filter, string message, string speaker, string effect, LanguagePrototype? language = null)
+    {
+        var soundData = await GenerateTTS(message, speaker, effect);
+        if (soundData is null)
             return;
 
-        var soundData = await GenerateTTS(message, speaker, "radio_headset"); // Arcane
-        if (soundData is null) return;
-        RaiseNetworkEvent(new PlayTTSEvent(soundData, GetNetEntity(uid)), recipients);
+        foreach (var recipient in filter.Recipients)
+        {
+            var uid = recipient.AttachedEntity;
+            if (uid == null)
+                continue;
+
+            if (language != null && !_language.CanUnderstand(uid.Value, language.ID))
+                continue;
+
+            RaiseNetworkEvent(new PlayTTSEvent(soundData, null), recipient);
+        }
     }
+    // Arcane-end
 
     private async void HandleSay(EntityUid uid, string message, LanguagePrototype language, string speaker)
     {
@@ -170,7 +186,6 @@ public sealed partial class TTSSystem : EntitySystem
     private readonly Dictionary<string, Task<byte[]?>> _ttsTasks = new();
     private readonly SemaphoreSlim _lock = new(1, 1);
 
-    // ReSharper disable once InconsistentNaming
     private async Task<byte[]?> GenerateTTS(string text, string speaker, string? effect = null)
     {
         var textSanitized = Sanitize(text);
@@ -180,38 +195,32 @@ public sealed partial class TTSSystem : EntitySystem
         if (char.IsLetter(textSanitized[^1]))
             textSanitized += ".";
 
-        return await _ttsManager.ConvertTextToSpeech(speaker, textSanitized, effect);
-        // var taskKey = $"{textSanitized}_{speaker}_{effect}";
+        var taskKey = $"{textSanitized}_{speaker}_{effect}";
 
-        // await _lock.WaitAsync();
-        // try
-        // {
-        //     if (_ttsTasks.TryGetValue(taskKey, out var existingTask))
-        //         return await existingTask;
+        await _lock.WaitAsync();
+        Task<byte[]?> task;
+        try
+        {
+            if (_ttsTasks.TryGetValue(taskKey, out var existing))
+                return await existing;
 
-        //     var newTask = _ttsManager.ConvertTextToSpeech(speaker, textSanitized);
-        //     _ttsTasks[taskKey] = newTask;
-        // }
-        // finally
-        // {
-        //     _lock.Release();
-        // }
+            task = _ttsManager.ConvertTextToSpeech(speaker, textSanitized, effect);
+            _ttsTasks[taskKey] = task;
+        }
+        finally
+        {
+            _lock.Release();
+        }
 
-        // try
-        // {
-        //     return await _ttsTasks[taskKey];
-        // }
-        // finally
-        // {
-        //     await _lock.WaitAsync();
-        //     try
-        //     {
-        //         _ttsTasks.Remove(taskKey);
-        //     }
-        //     finally
-        //     {
-        //         _lock.Release();
-        //     }
-        // }
+        try
+        {
+            return await task;
+        }
+        finally
+        {
+            await _lock.WaitAsync();
+            try { _ttsTasks.Remove(taskKey); }
+            finally { _lock.Release(); }
+        }
     }
 }

@@ -165,7 +165,8 @@ using Content.Shared.Traits.Assorted;
 using Content.Server._Arcane.Discord;
 using Content.Shared.Damage;
 using Content.Goobstation.Maths.FixedPoint;
-using Content.Shared._Shitmed.Targeting;
+using Content.Shared.StatusEffect;
+using Content.Shared.Speech.Muting;
 // Goob end
 
 namespace Content.Server.Chat.Systems;
@@ -201,17 +202,7 @@ public sealed partial class ChatSystem : SharedChatSystem
     [Dependency] private readonly ChatProtectionSystem _chatProtection = default!; // Orion
     [Dependency] private readonly EmoteProtectionSystem _emoteProtection = default!; // Orion
     [Dependency] private readonly ChatLogsWebhook _chatLogsWebhook = default!; // Arcane
-    [Dependency] private readonly DamageableSystem _damageable = default!; // Arcane
-
-    // Arcane-start
-    private readonly DamageSpecifier _rateLimitDamage = new()
-    {
-        DamageDict = new Dictionary<string, FixedPoint2>
-        {
-            ["Cellular"] = 12
-        },
-    };
-    // Arcane-end
+    [Dependency] private readonly StatusEffectsSystem _statusEffects = default!; // Arcane
 
     public const int VoiceRange = 10; // how far voice goes in world units
     public const int WhisperClearRange = 2; // how far whisper goes while still being understandable, in world units
@@ -373,7 +364,7 @@ public sealed partial class ChatSystem : SharedChatSystem
         {
             // Arcane-start
             if (desiredType == InGameICChatType.Speak || desiredType == InGameICChatType.Whisper)
-                _damageable.TryChangeDamage(player.AttachedEntity, _rateLimitDamage, true, targetPart: TargetBodyPart.Head);
+                _statusEffects.TryAddStatusEffect<MutedComponent>(source, "Muted", TimeSpan.FromSeconds(60), true);
             // Arcane-end
             return;
         }

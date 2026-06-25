@@ -49,6 +49,7 @@ public sealed partial class ContentAudioSystem : SharedContentAudioSystem
     public const float RadioMultiplier = 2f; // Orion
     public const float AdminNotificationsMultiplier = 1f; // Goobstation - Admin Notifications
     public const float TTSMultiplier = 1f; // Art-TTS
+    public const float TTSRadioMultiplier = 1f; // Arcane
 
     public override void Initialize()
     {

@@ -132,7 +132,7 @@ public sealed partial class RadioSystem : EntitySystem
             // Art-TTS Start
             if (canUnderstand && args.Voice is { } voice)
             {
-                var ev = new TTSRadioPlayEvent(args.OriginalChatMsg, args.OriginalChatMsg.Message, args.Language, voice);
+                var ev = new TTSRadioPlayEvent(Filter.SinglePlayer(actor.PlayerSession), args.OriginalChatMsg.Message, args.Language, voice);
                 RaiseLocalEvent(uid, ev);
             }
             // Art-TTS End

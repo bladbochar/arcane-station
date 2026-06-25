@@ -33,7 +33,10 @@ public sealed class TTSSystem : EntitySystem
     private const float WhisperVolumeReduction = 4f;
 
     private float _volume = 0.0f;
-    private bool _useTTS = false; // Arcane
+    // Arcane-start
+    private float _radioVolume = 0.0f;
+    private bool _useTTS = false;
+    // Arcane-end
     private ulong _fileIdx = 0;
     private static ulong _shareIdx = 0;
 
@@ -43,7 +46,10 @@ public sealed class TTSSystem : EntitySystem
         _sawmill = Logger.GetSawmill("tts");
         _res.AddRoot(_prefix, _contentRoot);
         _cfg.OnValueChanged(ArtCVars.TTSVolume, OnTtsVolumeChanged, true);
-        _cfg.OnValueChanged(ACCVars.UseTTS, OnUseTTSChanged, true); // Arcane
+        // Arcane-start
+        _cfg.OnValueChanged(ACCVars.TTSRadioVolume, OnTtsRadioVolumeChanged, true);
+        _cfg.OnValueChanged(ACCVars.UseTTS, OnUseTTSChanged, true);
+        // Arcane-end
         SubscribeNetworkEvent<PlayTTSEvent>(OnPlayTTS);
         SubscribeLocalEvent<RoundRestartCleanupEvent>(OnRoundRestart);
     }
@@ -57,7 +63,10 @@ public sealed class TTSSystem : EntitySystem
     {
         base.Shutdown();
         _cfg.UnsubValueChanged(ArtCVars.TTSVolume, OnTtsVolumeChanged);
+        // Arcane-start
+        _cfg.UnsubValueChanged(ACCVars.TTSRadioVolume, OnTtsRadioVolumeChanged);
         _cfg.UnsubValueChanged(ACCVars.UseTTS, OnUseTTSChanged);
+        // Arcane-end
         _contentRoot.Clear();
         _contentRoot.Dispose();
     }
@@ -73,6 +82,11 @@ public sealed class TTSSystem : EntitySystem
     }
 
     // Arcane-start
+    private void OnTtsRadioVolumeChanged(float volume)
+    {
+        _radioVolume = volume;
+    }
+
     private void OnUseTTSChanged(bool value)
     {
         _useTTS = value;
@@ -97,7 +111,7 @@ public sealed class TTSSystem : EntitySystem
             audioResource.Load(IoCManager.Instance!, _prefix / filePath);
 
             var audioParams = AudioParams.Default
-                .WithVolume(AdjustVolume(ev.IsWhisper))
+                .WithVolume(AdjustVolume(ev.IsWhisper, ev.SourceUid == null)) // Arcane
                 .WithMaxDistance(AdjustDistance(ev.IsWhisper));
 
             if (ev.SourceUid != null)
@@ -117,12 +131,17 @@ public sealed class TTSSystem : EntitySystem
         }
     }
 
-    private float AdjustVolume(bool isWhisper)
+    private float AdjustVolume(bool isWhisper, bool isRadio = false) // Arcane
     {
         var volume = SharedAudioSystem.GainToVolume(_volume);
 
         if (isWhisper)
             volume -= SharedAudioSystem.GainToVolume(WhisperVolumeReduction);
+
+        // Arcane-start
+        if (isRadio)
+            volume = SharedAudioSystem.GainToVolume(_radioVolume);
+        // Arcane-end
 
         return volume;
     }

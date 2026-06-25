@@ -121,7 +121,6 @@ public sealed class ChatSanitizationManager : IChatSanitizationManager
         Entry("((", "chatsan-frowns-deeply"),
         Entry("лол", "chatsan-laughs"),
         Entry("кек", "chatsan-laughs"),
-        Entry("хз", "chatsan-shrugs"),
         // Arcane-end
     ];
 
