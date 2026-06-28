@@ -181,7 +181,7 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
             }
 
             var inSlot = clothing.InSlotFlag ?? SlotFlags.NONE;
-            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled((item, hideLayer, clothing)))
+            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled(item, hideLayer))
                 continue;
 
             foreach (var (layer, validSlots) in hideLayer.Layers)
@@ -217,12 +217,12 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
             covered.Add(ErpOrganSlots.Breasts);
     }
 
-    private bool IsHideLayerEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)
+    private bool IsHideLayerEnabled(EntityUid uid, HideLayerClothingComponent hideLayer)
     {
-        if (!clothing.Comp1.HideOnToggle)
+        if (!hideLayer.HideOnToggle)
             return true;
 
-        if (!TryComp<MaskComponent>(clothing, out var mask))
+        if (!TryComp<MaskComponent>(uid, out var mask))
             return true;
 
         return !mask.IsToggled;

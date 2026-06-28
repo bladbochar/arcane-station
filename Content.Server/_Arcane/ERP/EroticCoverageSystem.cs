@@ -26,6 +26,7 @@ public sealed class EroticCoverageSystem : EntitySystem
         SubscribeLocalEvent<HumanoidAppearanceComponent, EroticOrgansSpawnedEvent>(OnOrgansSpawned);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ClothingDidEquippedEvent>(OnEquipped);
         SubscribeLocalEvent<HumanoidAppearanceComponent, ClothingDidUnequippedEvent>(OnUnequipped);
+        SubscribeLocalEvent<HumanoidAppearanceComponent, WearerMaskToggledEvent>(OnMaskToggled);
         // Re-run coverage when the visual component arrives (may lag behind the organs spawn event).
         SubscribeLocalEvent<ErpOrganVisualsComponent, ComponentStartup>(OnVisualsStartup);
     }
@@ -37,6 +38,9 @@ public sealed class EroticCoverageSystem : EntitySystem
         => RefreshCoverage(ent);
 
     private void OnUnequipped(Entity<HumanoidAppearanceComponent> ent, ref ClothingDidUnequippedEvent args)
+        => RefreshCoverage(ent);
+
+    private void OnMaskToggled(Entity<HumanoidAppearanceComponent> ent, ref WearerMaskToggledEvent args)
         => RefreshCoverage(ent);
 
     private void OnVisualsStartup(Entity<ErpOrganVisualsComponent> ent, ref ComponentStartup args)
@@ -94,7 +98,7 @@ public sealed class EroticCoverageSystem : EntitySystem
             }
 
             var inSlot = clothing.InSlotFlag ?? SlotFlags.NONE;
-            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled((item, hideLayer, clothing)))
+            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled(item, hideLayer))
                 continue;
 
             foreach (var (layer, validSlots) in hideLayer.Layers)
@@ -115,12 +119,12 @@ public sealed class EroticCoverageSystem : EntitySystem
         return coveredLayers;
     }
 
-    private bool IsHideLayerEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)
+    private bool IsHideLayerEnabled(EntityUid uid, HideLayerClothingComponent hideLayer)
     {
-        if (!clothing.Comp1.HideOnToggle)
+        if (!hideLayer.HideOnToggle)
             return true;
 
-        if (!TryComp<MaskComponent>(clothing, out var mask))
+        if (!TryComp<MaskComponent>(uid, out var mask))
             return true;
 
         return !mask.IsToggled;

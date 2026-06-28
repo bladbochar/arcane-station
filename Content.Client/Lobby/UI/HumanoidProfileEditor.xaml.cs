@@ -1465,6 +1465,8 @@ namespace Content.Client.Lobby.UI
             // Arcane-Start
             if (slot != null)
                 _erpOrganPrefs = IoCManager.Resolve<ClientErpOrganPreferencesManager>().GetSlot(slot.Value);
+            else
+                _erpOrganPrefs = ErpOrganPreferences.Default();
             // Arcane-End
 
             UpdateNameEdit();
