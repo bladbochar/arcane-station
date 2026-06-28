@@ -20,9 +20,6 @@ public sealed class EroticCoverageSystem : EntitySystem
     [Dependency] private readonly InventorySystem _inventory = default!;
     [Dependency] private readonly SharedContainerSystem _containers = default!;
 
-    private const SlotFlags GroinCovering = SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING | SlotFlags.LEGS | SlotFlags.UNDERWEAR;
-    private const SlotFlags ChestCovering = SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING | SlotFlags.UNDERSHIRT;
-
     public override void Initialize()
     {
         base.Initialize();
@@ -47,17 +44,7 @@ public sealed class EroticCoverageSystem : EntitySystem
 
     public void RefreshCoverage(EntityUid uid)
     {
-        var coverage = SlotFlags.NONE;
-        var enumerator = _inventory.GetSlotEnumerator(uid, GroinCovering | ChestCovering);
-        while (enumerator.NextItem(out var item))
-        {
-            if (TryComp<ClothingComponent>(item, out var clothing))
-                coverage |= clothing.Slots;
-        }
-
-        var groinCovered = (coverage & GroinCovering) != SlotFlags.NONE;
-        var chestCovered = (coverage & ChestCovering) != SlotFlags.NONE;
-
+        var coveredLayers = GetCoveredVisualLayers(uid);
         var newCovered = new HashSet<string>();
 
         if (!TryComp<BodyComponent>(uid, out var body)) // Arcane: standalone entities have no body
@@ -73,8 +60,8 @@ public sealed class EroticCoverageSystem : EntitySystem
 
             var covered = part.PartType switch
             {
-                BodyPartType.Groin => groinCovered,
-                BodyPartType.Chest => chestCovered,
+                BodyPartType.Groin => coveredLayers.Contains(HumanoidVisualLayers.ErpGroin),
+                BodyPartType.Chest => coveredLayers.Contains(HumanoidVisualLayers.ErpChest),
                 _ => false,
             };
 
@@ -92,5 +79,50 @@ public sealed class EroticCoverageSystem : EntitySystem
 
         visuals.CoveredSlots = newCovered;
         Dirty(uid, visuals);
+    }
+
+    private HashSet<HumanoidVisualLayers> GetCoveredVisualLayers(EntityUid uid)
+    {
+        var coveredLayers = new HashSet<HumanoidVisualLayers>();
+        var enumerator = _inventory.GetSlotEnumerator(uid);
+        while (enumerator.NextItem(out var item))
+        {
+            if (!TryComp<HideLayerClothingComponent>(item, out var hideLayer) ||
+                !TryComp<ClothingComponent>(item, out var clothing))
+            {
+                continue;
+            }
+
+            var inSlot = clothing.InSlotFlag ?? SlotFlags.NONE;
+            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled((item, hideLayer, clothing)))
+                continue;
+
+            foreach (var (layer, validSlots) in hideLayer.Layers)
+            {
+                if (validSlots.HasFlag(inSlot))
+                    coveredLayers.Add(layer);
+            }
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (hideLayer.Slots is { } slots && clothing.Slots.HasFlag(inSlot))
+#pragma warning restore CS0618 // Type or member is obsolete
+            {
+                foreach (var layer in slots)
+                    coveredLayers.Add(layer);
+            }
+        }
+
+        return coveredLayers;
+    }
+
+    private bool IsHideLayerEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)
+    {
+        if (!clothing.Comp1.HideOnToggle)
+            return true;
+
+        if (!TryComp<MaskComponent>(clothing, out var mask))
+            return true;
+
+        return !mask.IsToggled;
     }
 }

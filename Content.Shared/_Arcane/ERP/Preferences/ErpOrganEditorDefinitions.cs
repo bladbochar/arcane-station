@@ -27,8 +27,12 @@ public static class ErpOrganEditorDefinitions
             return GetFallbackDefinitions(sex);
 
         if (!prototype.TryIndex<SpeciesPrototype>(species, out var speciesPrototype) ||
-            !prototype.TryIndex<EntityPrototype>(speciesPrototype.Prototype, out var entityPrototype) ||
-            !entityPrototype.TryGetComponent<EroticOrgansComponent>(out var organs, componentFactory))
+            !prototype.TryIndex<EntityPrototype>(speciesPrototype.Prototype, out var entityPrototype))
+        {
+            return GetFallbackDefinitions(sex);
+        }
+
+        if (!entityPrototype.TryGetComponent<EroticOrgansComponent>(out var organs, componentFactory))
         {
             return []; // Species exists but has no EroticOrgans — editor shows nothing
         }

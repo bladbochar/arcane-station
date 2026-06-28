@@ -197,12 +197,12 @@ using Direction = Robust.Shared.Maths.Direction;
 using Content.Goobstation.Common.CCVar; // Goob Station - Barks
 using Content.Goobstation.Common.Barks; // Goob Station - Barks
 using Content.Shared._Orion.RichText;
-using Content.Shared._Arcane.CCVars; // Arcane-edit
-using Content.Shared._Arcane.ERP; // Arcane-edit
-using Content.Client._Arcane.ERP.UI; // Arcane-edit
-using Content.Client._Arcane.ERP.OrgansAppearance; // Arcane-edit
-using Content.Client._Arcane.ERP.Preferences; // Arcane-edit
-using Content.Shared._Arcane.ERP.Preferences; // Arcane-edit
+using Content.Shared._Arcane.CCVars;
+using Content.Shared._Arcane.ERP;
+using Content.Client._Arcane.ERP.UI;
+using Content.Client._Arcane.ERP.OrgansAppearance;
+using Content.Client._Arcane.ERP.Preferences;
+using Content.Shared._Arcane.ERP.Preferences;
 namespace Content.Client.Lobby.UI
 {
     [GenerateTypedNameReferences]

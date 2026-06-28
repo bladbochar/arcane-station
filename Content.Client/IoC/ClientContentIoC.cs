@@ -148,7 +148,7 @@ using Content.Shared.Administration.Managers;
 using Content.Shared.Chat;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Client._Arcane.ERP.Preferences; // Arcane-edit
+using Content.Client._Arcane.ERP.Preferences;
 
 namespace Content.Client.IoC
 {

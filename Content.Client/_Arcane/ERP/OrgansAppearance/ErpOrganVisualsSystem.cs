@@ -26,9 +26,6 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
     [Dependency] private readonly IComponentFactory _componentFactory = default!;
     [Dependency] private readonly InventorySystem _inventory = default!;
 
-    private const SlotFlags GroinCovering = SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING | SlotFlags.LEGS | SlotFlags.UNDERWEAR;
-    private const SlotFlags ChestCovering = SlotFlags.INNERCLOTHING | SlotFlags.OUTERCLOTHING | SlotFlags.UNDERSHIRT;
-
     // (slot, species) → prototype; built from erpOrganVisual prototypes at Initialize.
     private readonly Dictionary<(string slot, string species), ErpOrganVisualPrototype> _speciesLookup = new();
     // slot → fallback prototype (species list was empty).
@@ -173,17 +170,41 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
 
     private HashSet<string> GetPreviewCoveredSlots(EntityUid uid)
     {
-        var coverage = SlotFlags.NONE;
-        var enumerator = _inventory.GetSlotEnumerator(uid, GroinCovering | ChestCovering);
+        var covered = new HashSet<string>();
+        var enumerator = _inventory.GetSlotEnumerator(uid);
         while (enumerator.NextItem(out var item))
         {
-            if (TryComp<ClothingComponent>(item, out var clothing))
-                coverage |= clothing.Slots;
+            if (!TryComp<HideLayerClothingComponent>(item, out var hideLayer) ||
+                !TryComp<ClothingComponent>(item, out var clothing))
+            {
+                continue;
+            }
+
+            var inSlot = clothing.InSlotFlag ?? SlotFlags.NONE;
+            if (inSlot == SlotFlags.NONE || !IsHideLayerEnabled((item, hideLayer, clothing)))
+                continue;
+
+            foreach (var (layer, validSlots) in hideLayer.Layers)
+            {
+                if (validSlots.HasFlag(inSlot))
+                    AddCoveredSlotsForLayer(covered, layer);
+            }
+
+#pragma warning disable CS0618 // Type or member is obsolete
+            if (hideLayer.Slots is { } slots && clothing.Slots.HasFlag(inSlot))
+#pragma warning restore CS0618 // Type or member is obsolete
+            {
+                foreach (var layer in slots)
+                    AddCoveredSlotsForLayer(covered, layer);
+            }
         }
 
-        var covered = new HashSet<string>();
+        return covered;
+    }
 
-        if ((coverage & GroinCovering) != SlotFlags.NONE)
+    private static void AddCoveredSlotsForLayer(HashSet<string> covered, HumanoidVisualLayers layer)
+    {
+        if (layer == HumanoidVisualLayers.ErpGroin)
         {
             covered.Add(ErpOrganSlots.Penis);
             covered.Add(ErpOrganSlots.Testicles);
@@ -192,10 +213,19 @@ public sealed class ErpOrganVisualsSystem : EntitySystem
             covered.Add(ErpOrganSlots.Butt);
         }
 
-        if ((coverage & ChestCovering) != SlotFlags.NONE)
+        if (layer == HumanoidVisualLayers.ErpChest)
             covered.Add(ErpOrganSlots.Breasts);
+    }
 
-        return covered;
+    private bool IsHideLayerEnabled(Entity<HideLayerClothingComponent, ClothingComponent> clothing)
+    {
+        if (!clothing.Comp1.HideOnToggle)
+            return true;
+
+        if (!TryComp<MaskComponent>(clothing, out var mask))
+            return true;
+
+        return !mask.IsToggled;
     }
 
     private void OnOrganState(Entity<ErpOrganVisualsComponent> ent, ref AfterAutoHandleStateEvent args)

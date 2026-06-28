@@ -202,7 +202,7 @@ using Content.Shared.Chat;
 using Content.Shared.Kitchen;
 using Content.Shared.Players.PlayTimeTracking;
 using Content.Shared.Players.RateLimiting;
-using Content.Server._Arcane.ERP.Preferences; // Arcane-edit
+using Content.Server._Arcane.ERP.Preferences;
 
 namespace Content.Server.IoC
 {
