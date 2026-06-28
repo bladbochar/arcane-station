@@ -244,6 +244,7 @@ namespace Content.Client.Lobby.UI
         // Orion-End
 
         // Arcane-Start
+        private readonly ClientErpOrganPreferencesManager _erpOrganPreferences;
         private ErpOrganSection? _erpOrganSection;
         private Action<int, ErpOrganPreferences>? _erpPrefsReceivedHandler;
         // Arcane-End
@@ -326,6 +327,7 @@ namespace Content.Client.Lobby.UI
             _requirements = requirements;
             _controller = UserInterfaceManager.GetUIController<LobbyUIController>();
             _sprite = _entManager.System<SpriteSystem>();
+            _erpOrganPreferences = IoCManager.Resolve<ClientErpOrganPreferencesManager>(); // Arcane
 
             _maxNameLength = _cfgManager.GetCVar(CCVars.MaxNameLength);
             _allowFlavorText = _cfgManager.GetCVar(CCVars.FlavorText);
@@ -361,7 +363,7 @@ namespace Content.Client.Lobby.UI
                 // Arcane-Start: save ERP prefs after profile so server normalization sees the updated species/sex
                 if (CharacterSlot != null)
                 {
-                    IoCManager.Resolve<ClientErpOrganPreferencesManager>().SaveSlot(CharacterSlot.Value, _erpOrganPrefs);
+                    _erpOrganPreferences.SaveSlot(CharacterSlot.Value, _erpOrganPrefs);
                     _erpOrganPrefsDirty = false; // Arcane-edit: reset after confirmed save
                 }
                 // Arcane-End
@@ -744,7 +746,7 @@ namespace Content.Client.Lobby.UI
                 UpdateErpOrganSection();
                 RefreshErpOrganPreview();
             };
-            IoCManager.Resolve<ClientErpOrganPreferencesManager>().OnPreferencesReceived += _erpPrefsReceivedHandler;
+            _erpOrganPreferences.OnPreferencesReceived += _erpPrefsReceivedHandler;
             // Arcane-End
 
             #endregion Markings
@@ -1464,7 +1466,7 @@ namespace Content.Client.Lobby.UI
 
             // Arcane-Start
             if (slot != null)
-                _erpOrganPrefs = IoCManager.Resolve<ClientErpOrganPreferencesManager>().GetSlot(slot.Value);
+                _erpOrganPrefs = _erpOrganPreferences.GetSlot(slot.Value);
             else
                 _erpOrganPrefs = ErpOrganPreferences.Default();
             // Arcane-End
@@ -2006,7 +2008,7 @@ namespace Content.Client.Lobby.UI
             // Arcane-Start
             if (_erpPrefsReceivedHandler != null)
             {
-                IoCManager.Resolve<ClientErpOrganPreferencesManager>().OnPreferencesReceived -= _erpPrefsReceivedHandler;
+                _erpOrganPreferences.OnPreferencesReceived -= _erpPrefsReceivedHandler;
                 _erpPrefsReceivedHandler = null;
             }
             // Arcane-End
