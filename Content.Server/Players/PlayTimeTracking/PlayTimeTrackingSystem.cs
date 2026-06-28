@@ -83,6 +83,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
 using System.Linq;
+using Content.Server._RMC14.LinkAccount;
 using Content.Server.Administration;
 using Content.Server.Administration.Managers;
 using Content.Server.Afk;
@@ -91,6 +92,7 @@ using Content.Server.GameTicking;
 using Content.Server.GameTicking.Events;
 using Content.Server.Preferences.Managers;
 using Content.Server.Station.Events;
+using Content.Shared._Arcane.Sponsor;
 using Content.Shared.CCVar;
 using Content.Shared.GameTicking;
 using Content.Shared.Mobs;
@@ -121,6 +123,7 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
     [Dependency] private readonly SharedRoleSystem _roles = default!;
     [Dependency] private readonly PlayTimeTrackingManager _tracking = default!;
+    [Dependency] private readonly LinkAccountManager _linkManager = default!; // Arcane
 
     public override void Initialize()
     {
@@ -276,6 +279,11 @@ public sealed class PlayTimeTrackingSystem : EntitySystem
         if (!_prototypes.TryIndex<JobPrototype>(role, out var job) ||
             !_cfg.GetCVar(CCVars.GameRoleTimers))
             return true;
+
+        // Arcane-sponsor-start
+        if (ArcaneSponsorTiers.HasAllRoles(_linkManager.GetPatron(player)?.Tier?.Tier))
+            return true;
+        // Arcane-sponsor-end
 
         if (!_tracking.TryGetTrackerTimes(player, out var playTimes))
         {
