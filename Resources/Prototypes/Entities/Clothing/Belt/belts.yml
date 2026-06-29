@@ -971,7 +971,10 @@
       tags:
         - ShellShotgun
     grid:
-    - 0,0,6,1
+    - 0,0,6,2
+    quickInsert: true
+    areaInsert: true
+  - type: Dumpable
   # Arcane-Edit-End
 
 - type: entity
