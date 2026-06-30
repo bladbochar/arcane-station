@@ -53,8 +53,8 @@ public sealed partial class InfinityDormSystem : EntitySystem
     private int _maxUserDorms = 0;
 
     private int _step = 300;
-    private float _lastPosition = -1000f;
-    private MapId _dormsMapId = MapId.Nullspace;
+    private float _lastPosition;
+    private MapId _dormsMapId;
 
     public override void Initialize()
     {
@@ -105,6 +105,7 @@ public sealed partial class InfinityDormSystem : EntitySystem
     private void OnRoundStarted(RoundStartedEvent args)
     {
         _dormsMapId = MapId.Nullspace;
+        _lastPosition = -1000;
     }
 
     private void EnsureDormsMap()
