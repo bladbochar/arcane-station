@@ -59,6 +59,14 @@
     - PrintedDocumentJudgmentRecipe
     - PrintedDocumentStatementHealthRecipe
     - PrintedDocumentDecisionToStartTrialRecipe
+    # Arcane-start
+    - DocumentContractEmploymentSecurityRecipe
+    - DocumentContractEmploymentCargoRecipe
+    - DocumentContractEmploymentEngineeringRecipe
+    - DocumentContractEmploymentMedicalRecipe
+    - DocumentContractEmploymentRndRecipe
+    - DocumentContractEmploymentServiceRecipe
+    # Arcane-end
 
 - type: latheRecipePack
   id: PaperFormsSyndicate
