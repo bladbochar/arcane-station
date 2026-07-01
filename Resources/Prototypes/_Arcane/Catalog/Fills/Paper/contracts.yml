@@ -66,3 +66,32 @@
       content: doc-text-employment-contract-service
       editingDisabled: true
 
+- type: entity
+  parent: BaseContract
+  id: DocumentContractEmploymentCommand
+  name: work contract
+  categories: [HideSpawnMenu]
+  components:
+    - type: Paper
+      content: doc-text-employment-contract-command
+      editingDisabled: true
+
+- type: entity
+  parent: BaseContract
+  id: DocumentContractEmploymentDSO
+  name: work contract
+  categories: [HideSpawnMenu]
+  components:
+    - type: Paper
+      content: doc-text-employment-contract-dso
+      editingDisabled: true
+
+- type: entity
+  parent: BaseContract
+  id: DocumentContractEmploymentCentCom
+  name: work contract
+  categories: [HideSpawnMenu]
+  components:
+    - type: Paper
+      content: doc-text-employment-contract-centcom
+      editingDisabled: true

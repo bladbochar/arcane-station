@@ -18,3 +18,12 @@ ent-DocumentContractEmploymentRnd = Контракт научного отдел
 
 ent-DocumentContractEmploymentService = Контракт сервисного отдела
     .desc = { contract-paper-description }
+
+ent-DocumentContractEmploymentCommand = Контракт командования
+    .desc = { contract-paper-description }
+
+ent-DocumentContractEmploymentDSO = Контракт департамента специальных операций
+    .desc = { contract-paper-description }
+
+ent-DocumentContractEmploymentCentCom= Контракт центрального командования
+    .desc = { contract-paper-description }

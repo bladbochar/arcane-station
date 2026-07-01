@@ -66,6 +66,7 @@
     - DocumentContractEmploymentMedicalRecipe
     - DocumentContractEmploymentRndRecipe
     - DocumentContractEmploymentServiceRecipe
+    - DocumentContractEmploymentCommandRecipe
     # Arcane-end
 
 - type: latheRecipePack
