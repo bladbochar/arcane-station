@@ -24,7 +24,7 @@
     drawdepth: FloorObjects
   - type: Construction
     graph: LightFixture
-
+    node: tubeLight
 - type: entity
   name: reinforced floor light side
   description: What are you looking for? It's just a floor light!
