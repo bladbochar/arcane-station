@@ -25,3 +25,6 @@ construction-recipe-pinion-airlock-glass = стеклянный заводной
 construction-recipe-airlock-glass-shuttle = стеклянный шлюз шаттла
 construction-recipe-plastic-flaps-clear = пластиковые шторки (прозрачные)
 construction-recipe-plastic-flaps-opaque = пластиковые шторки (непрозрачные)
+recipe-bulb-floor-light = маленький напольный светильник
+recipe-tube-floor-light-middle = напольный светильник (центр)
+recipe-tube-floor-light-side = напольный светильник (крайний)
