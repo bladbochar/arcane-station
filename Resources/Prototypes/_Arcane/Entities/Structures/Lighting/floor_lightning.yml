@@ -10,7 +10,7 @@
     drawdepth: FloorObjects
   - type: Construction
     graph: LightFixture
-    node: bulbFloorLight
+    node: bulbLight
 
 - type: entity
   name: reinforced glowing line middle
@@ -24,7 +24,6 @@
     drawdepth: FloorObjects
   - type: Construction
     graph: LightFixture
-    node: tubeFloorLightMiddle
 
 - type: entity
   name: reinforced floor light side
