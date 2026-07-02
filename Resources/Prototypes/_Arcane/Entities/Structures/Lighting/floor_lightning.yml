@@ -38,7 +38,7 @@
     drawdepth: FloorObjects
   - type: Construction
     graph: LightFixture
-    node: tubeFloorLightSide
+    node: tubeLight
 
 - type: entity
   id: SmallFloorLightMiddle
