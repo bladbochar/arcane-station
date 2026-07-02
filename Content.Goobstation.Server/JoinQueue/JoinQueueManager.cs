@@ -178,8 +178,7 @@ public sealed class JoinQueueManager : IJoinQueueManager
                 UpdateQueueWaitRecord(e.Session, DateTime.UtcNow); // Arcane-edit
             }
 
-            if (e.OldStatus == SessionStatus.InGame)
-                _bypassUsers.Remove(e.Session.UserId);
+            _bypassUsers.Remove(e.Session.UserId); // Arcane-edit
 
             if (wasInQueue || wasInPatronQueue)
             {
@@ -240,7 +239,7 @@ public sealed class JoinQueueManager : IJoinQueueManager
             {
                 if (reservation.IsPatron && !_patreonIsEnabled)
                 {
-                    _queue.Add(session);
+                    InsertByConnectedTime(_queue, session); // Arcane-edit
                 }
                 else
                 {
@@ -257,10 +256,24 @@ public sealed class JoinQueueManager : IJoinQueueManager
 
         _queueWaitOffsets.Remove(session.UserId); // Arcane-edit
 
-        _queue.Add(session);
+        InsertByConnectedTime(_queue, session); // Arcane-edit
         _queuedSessions[session.UserId] = session;
         ProcessQueue();
     }
+
+    // Arcane-edit-start
+    private static void InsertByConnectedTime(List<ICommonSession> queue, ICommonSession session)
+    {
+        var index = queue.FindIndex(other => other.ConnectedTime > session.ConnectedTime);
+        if (index < 0)
+        {
+            queue.Add(session);
+            return;
+        }
+
+        queue.Insert(index, session);
+    }
+    // Arcane-edit-end
 
     private void ProcessQueue() // Arcane-edit
     {
