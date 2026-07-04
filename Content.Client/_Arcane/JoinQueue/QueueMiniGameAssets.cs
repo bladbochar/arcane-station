@@ -1,5 +1,6 @@
 using Robust.Client.Graphics;
 using Robust.Client.ResourceManagement;
+using Robust.Shared.Graphics.RSI;
 
 namespace Content.Client._Arcane.JoinQueue;
 
@@ -7,7 +8,8 @@ internal static class QueueMiniGameAssets
 {
     private const string RegularFontPath = "/Fonts/NotoSans/NotoSans-Regular.ttf";
     private const string BoldFontPath = "/Fonts/NotoSans/NotoSans-Bold.ttf";
-    private const string SpacepodTexturePath = "/Textures/_Arcane/Interface/MiniGames/spacepod.rsi/spacepod.png";
+    private const string SpacepodRsiPath = "/Textures/_Arcane/Interface/MiniGames/spacepod.rsi";
+    private const string SpacepodState = "spacepod";
 
     public const string SpaceCarpRsi = "Mobs/Aliens/Carps/space.rsi";
     public const string MagicCarpRsi = "Mobs/Aliens/Carps/magic.rsi";
@@ -27,6 +29,10 @@ internal static class QueueMiniGameAssets
 
     public static Texture LoadSpacepodTexture(IResourceCache cache)
     {
-        return cache.GetResource<TextureResource>(SpacepodTexturePath).Texture;
+        var rsi = cache.GetResource<RSIResource>(SpacepodRsiPath).RSI;
+        if (!rsi.TryGetState(SpacepodState, out var state))
+            throw new ArgumentOutOfRangeException(nameof(SpacepodState), $"Spacepod RSI doesn't have state \"{SpacepodState}\".");
+
+        return state.GetFrame(RsiDirection.South, 0);
     }
 }

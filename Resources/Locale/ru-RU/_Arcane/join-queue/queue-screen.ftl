@@ -24,3 +24,4 @@ queue-leaderboard-score-entry = {$name}: {$score}
 queue-leaderboard-you = {$name} (вы)
 queue-leaderboard-time-seconds = {$seconds}с
 queue-leaderboard-time-minutes = {$minutes}м {$seconds}с
+queue-leaderboard-time-hours = {$hours}ч {$minutes}м

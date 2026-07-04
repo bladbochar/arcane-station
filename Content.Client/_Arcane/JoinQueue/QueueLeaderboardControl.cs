@@ -111,7 +111,8 @@ public sealed class QueueTimeLeaderboardControl : BoxContainer
 {
     private const int MaxQueueRows = 5;
     private const float RefreshInterval = 60f;
-    private const float ColumnWidth = 268f;
+    private const float ColumnWidth = 320f;
+    private const float TimeColumnWidth = 92f;
 
     private readonly List<QueueWaitEntry> _queueWaitTimes = [];
     private readonly List<(Label Name, Label Time)> _queueRows = [];
@@ -138,7 +139,8 @@ public sealed class QueueTimeLeaderboardControl : BoxContainer
             var row = QueueLeaderboardRows.MakeRow(Loc.GetString("queue-leaderboard-empty"),
                 string.Empty,
                 out var timeLabel,
-                out var nameLabel);
+                out var nameLabel,
+                TimeColumnWidth);
 
             _queueRows.Add((nameLabel, timeLabel));
             AddChild(row);
@@ -211,10 +213,18 @@ public sealed class QueueTimeLeaderboardControl : BoxContainer
     private static string FormatQueueTime(float seconds)
     {
         var totalSeconds = Math.Max(0, (int) seconds);
+        var hours = totalSeconds / 3600;
         var minutes = totalSeconds / 60;
         var remainingSeconds = totalSeconds % 60;
 
-        return minutes <= 0
+        if (hours > 0)
+        {
+            return Loc.GetString("queue-leaderboard-time-hours",
+                ("hours", hours),
+                ("minutes", minutes % 60));
+        }
+
+        return minutes == 0
             ? Loc.GetString("queue-leaderboard-time-seconds", ("seconds", remainingSeconds))
             : Loc.GetString("queue-leaderboard-time-minutes",
                 ("minutes", minutes),
